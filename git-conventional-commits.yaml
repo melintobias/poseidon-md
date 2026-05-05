@@ -1,0 +1,30 @@
+convention:
+  commitTypes:
+    - feat # Commits that add or remove features
+    - fix # Commits that fix bugs
+    - refactor # Commits that rewrite or restructure code without changing its behavior
+    - perf # Commits that improve performance
+    - style # Commits that do not affect the meaning of code (whitespace, formatting, missing semicolons etc.)
+    - test # Commits that add missing or correct existing tests
+    - build # Commits that affect build components (build tools, CI pipeline, dependencies, project versions etc.)
+    - ops # Commits that affect operational components (infrastructure, deployment, backup, recovery etc.)
+    - docs # Commits that affect documentation only
+    - chore # Miscellaneous commits (`.gitignore` etc.)
+    - merge # Commits that merge branches
+    - revert # Commits that revert previous commits
+  commitScopes: [tools]
+  releaseTagGlobPattern: v[0-9]*.[0-9]*.[0-9]*
+changelog:
+  commitTypes:
+    - feat
+    - fix
+    - perf
+    - merge
+  includeInvalidCommits: true
+  commitIgnoreRegexPattern: "^WIP "
+  headlines:
+    feat: Features
+    fix: Bug Fixes
+    perf: Performance Improvements
+    merge: Merges
+    breakingChange: BREAKING CHANGES
