@@ -1,0 +1,15 @@
+[project]
+name = "poseidon-md"
+version = "0.1.0"
+description = "Poseidon-MD: An end-to-end audio acquisition tool that extracts audio from online sources, resolves metadata, and outputs properly tagged files in MP3 and more."
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "ruff>=0.15.12",
+]
+
+[tool.uv.workspace]
+members = [
+    "packages/*",
+    "services/*",
+]

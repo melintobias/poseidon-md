@@ -1,0 +1,7 @@
+[project]
+name = "worker"
+version = "0.1.0"
+description = "Worker service for Poseidon-MD"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = []
