@@ -4,5 +4,5 @@ An end-to-end music acquisition tool that extracts audio from online sources, re
 
 ## Development
 
-For development instructions, please refer to the [DEVELOPMENT.md](DEVELOPMENT.md)
+For development instructions, please refer to the [`DEVELOPMENT.md`](DEVELOPMENT.md)
 file.
