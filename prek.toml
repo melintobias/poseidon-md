@@ -21,8 +21,8 @@ id = "taplo-format"
 name = "taplo-format"
 entry = "uvx taplo fmt"
 language = "system"
-pass_filenames = true
 types = ["toml"]
+pass_filenames = true
 require_serial = true
 
 [[repos.hooks]]
@@ -30,8 +30,8 @@ id = "taplo-check"
 name = "taplo-check"
 entry = "uvx taplo check"
 language = "system"
-pass_filenames = true
 types = ["toml"]
+pass_filenames = true
 require_serial = true
 
 [[repos]]
