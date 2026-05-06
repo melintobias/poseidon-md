@@ -26,7 +26,7 @@ docstring-code-format = true
 [tool.ruff.lint]
 preview = true
 dummy-variable-rgx = "^\\*{0,2}(_$|unused_|dummy_)"
-logger-objects = ["logging", "absl.logging", "tensorflow.io.logging"]# See: https://github.com/astral-sh/ruff/issues/970
+logger-objects = ["logging", "absl.logging", "tensorflow.io.logging"]
 extend-select = [
     "D419",  # empty-docstring
     "E501",  # line-too-long
