@@ -130,6 +130,10 @@ order-by-type = false
 [tool.ruff.lint.pydocstyle]
 convention = "google"
 
-
 [dependency-groups]
-dev = ["prek>=0.3.13", "pyright[nodejs]>=1.1.409", "ruff>=0.15.12", "taplo"]
+dev = [
+  "prek>=0.3.13",
+  "pyright[nodejs]>=1.1.409",
+  "ruff>=0.15.12",
+  "taplo>=0.9.3",
+]
