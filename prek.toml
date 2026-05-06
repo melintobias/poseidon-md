@@ -1,7 +1,7 @@
 [[repos]]
-repo = "https://github.com/astral-sh/ruff-pre-commit"
-rev = "v0.15.12"
-hooks = [{ id = "ruff-check" }, { id = "ruff-format" }]
+repo = "https://github.com/qoomon/git-conventional-commits"
+rev = "v2.9.0"
+hooks = [{ id = "conventional-commits" }]
 
 [[repos]]
 repo = "https://github.com/RobertCraigie/pyright-python"
@@ -9,9 +9,9 @@ rev = "v1.1.409"
 hooks = [{ id = "pyright" }]
 
 [[repos]]
-repo = "https://github.com/qoomon/git-conventional-commits"
-rev = "v2.9.0"
-hooks = [{ id = "conventional-commits" }]
+repo = "https://github.com/astral-sh/ruff-pre-commit"
+rev = "v0.15.12"
+hooks = [{ id = "ruff-check" }, { id = "ruff-format" }]
 
 [[repos]]
 repo = "local"
