@@ -5,5 +5,5 @@ metadata, and outputs properly tagged files in MP3 format and more.
 
 ## Development
 
-For development instructions, please refer to the [`DEVELOPMENT.md`](DEVELOPMENT.md)
+For development instructions, please refer to the [`CONTRIBUTING.md`](CONTRIBUTING.md)
 file.
