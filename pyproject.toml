@@ -124,7 +124,7 @@ ignore = [
 force-single-line = true
 force-sort-within-sections = true
 known-third-party = ["enchant", "absl"]
-single-line-exclusions = ["typing"]
+single-line-exclusions = ["collections.abc", "typing"]
 order-by-type = false
 
 [tool.ruff.lint.pydocstyle]
