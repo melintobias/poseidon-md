@@ -18,7 +18,7 @@ repo = "local"
 
 [[repos.hooks]]
 id = "taplo-format"
-name = "Taplo format"
+name = "taplo-format"
 entry = "uvx taplo fmt"
 language = "system"
 pass_filenames = true
@@ -27,7 +27,7 @@ require_serial = true
 
 [[repos.hooks]]
 id = "taplo-check"
-name = "Taplo check"
+name = "taplo-check"
 entry = "uvx taplo check"
 language = "system"
 pass_filenames = true

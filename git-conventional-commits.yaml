@@ -12,7 +12,7 @@ convention:
     - chore # Miscellaneous commits (`.gitignore` etc.)
     - merge # Commits that merge branches
     - revert # Commits that revert previous commits
-  commitScopes: [dev, readme, tools]
+  commitScopes: [dev, prek, readme, tools]
   releaseTagGlobPattern: v[0-9]*.[0-9]*.[0-9]*
 changelog:
   commitTypes:
