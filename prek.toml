@@ -12,3 +12,24 @@ hooks = [{ id = "pyright" }]
 repo = "https://github.com/qoomon/git-conventional-commits"
 rev = "v2.9.0"
 hooks = [{ id = "conventional-commits" }]
+
+[[repos]]
+repo = "local"
+
+[[repos.hooks]]
+id = "taplo-format"
+name = "Taplo format"
+entry = "uvx taplo fmt"
+language = "system"
+pass_filenames = true
+types = ["toml"]
+require_serial = true
+
+[[repos.hooks]]
+id = "taplo-check"
+name = "Taplo check"
+entry = "uvx taplo check"
+language = "system"
+pass_filenames = true
+types = ["toml"]
+require_serial = true
