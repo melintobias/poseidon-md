@@ -4,6 +4,22 @@ rev = "v2.9.0"
 hooks = [{ id = "conventional-commits" }]
 
 [[repos]]
+repo = "https://github.com/streetsidesoftware/cspell-cli"
+rev = "v10.0.0"
+hooks = [
+  { id = "cspell" },
+  { id = "cspell", name = "cspell", args = [
+    "--no-must-find-files",
+    "--no-progress",
+    "--no-summary",
+    "--files",
+    "git/COMMIT_EDITMSG",
+  ], stages = [
+    "commit-msg",
+  ], always_run = true },
+]
+
+[[repos]]
 repo = "https://github.com/RobertCraigie/pyright-python"
 rev = "v1.1.409"
 hooks = [{ id = "pyright" }]

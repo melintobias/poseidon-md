@@ -1,0 +1,19 @@
+version: "0.2"
+dictionaries:
+  - python
+minWordLength: 0
+words:
+  - absl
+  - dunder
+  - EDITMSG
+  - fmt
+  - fn
+  - PLE
+  - PLR
+  - PLW
+  - preexec
+  - prek
+  - rgx
+  - taplo
+  - uvx
+  - WIP
