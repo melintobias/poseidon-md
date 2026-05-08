@@ -19,6 +19,7 @@ line-length = 80
 [tool.ruff.format]
 preview = true
 docstring-code-format = true
+indent-style = "tab"
 
 [tool.ruff.lint]
 preview = true
@@ -135,5 +136,4 @@ dev = [
   "prek>=0.3.13",
   "pyright[nodejs]>=1.1.409",
   "ruff>=0.15.12",
-  "taplo>=0.9.3",
 ]
