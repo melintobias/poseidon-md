@@ -4,6 +4,7 @@ dictionaries:
 minWordLength: 0
 words:
   - absl
+  - dlx
   - dunder
   - EDITMSG
   - fmt
@@ -15,6 +16,5 @@ words:
   - prek
   - pyi
   - rgx
-  - taplo
   - uvx
   - WIP

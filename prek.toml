@@ -28,36 +28,20 @@ hooks = [{ id = "pyright" }]
 repo = "https://github.com/astral-sh/ruff-pre-commit"
 rev = "v0.15.12"
 hooks = [
-  { id = "ruff-check" },
-  { id = "ruff-format", "types_or" = [
-    "python",
-    "pyi",
-    "markdown",
-  ] },
+	{ id = "ruff-check" },
+	{ id = "ruff-format", "types_or" = [
+		"python",
+		"pyi",
+		"markdown",
+	] },
 ]
 
 [[repos]]
 repo = "local"
 
 [[repos.hooks]]
-id = "taplo-format"
-name = "taplo format"
-entry = "uvx taplo fmt"
+id = "prettier"
+name = "prettier"
+entry = "pnpm dlx pretty-quick --no-restage --staged"
 language = "system"
-types = ["toml"]
-pass_filenames = true
-require_serial = true
-
-[[repos.hooks]]
-id = "taplo-check"
-name = "taplo check"
-entry = "uvx taplo check"
-language = "system"
-types = ["toml"]
-pass_filenames = true
-require_serial = true
-
-[[repos]]
-repo = "https://github.com/google/yamlfmt"
-rev = "v0.19.0"
-hooks = [{ id = "yamlfmt" }]
+files = "\\.(css|scss|htm|html|js|jsx|ts|tsx|json|yml|yaml|md)$"
