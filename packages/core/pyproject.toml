@@ -3,5 +3,5 @@ name = "poseidon-md-core"
 version = "0.1.0"
 description = "The core library for Poseidon-MD, providing shared utilities and functionality for end-to-end audio acquisition."
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.14"
 dependencies = []
