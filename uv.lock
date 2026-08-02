@@ -1,36 +1,12 @@
 version = 1
 revision = 3
-requires-python = ">=3.9"
+requires-python = ">=3.14"
 
 [manifest]
 members = [
-    "api",
-    "cli",
-    "core",
-    "frontend",
     "poseidon-md",
-    "worker",
+    "poseidon-md-core",
 ]
-
-[[package]]
-name = "api"
-version = "0.1.0"
-source = { virtual = "services/api" }
-
-[[package]]
-name = "cli"
-version = "0.1.0"
-source = { virtual = "services/cli" }
-
-[[package]]
-name = "core"
-version = "0.1.0"
-source = { virtual = "packages/core" }
-
-[[package]]
-name = "frontend"
-version = "0.1.0"
-source = { virtual = "services/frontend" }
 
 [[package]]
 name = "nodeenv"
@@ -77,6 +53,11 @@ dev = [
     { name = "pyright", extras = ["nodejs"], specifier = ">=1.1.409" },
     { name = "ruff", specifier = ">=0.15.12" },
 ]
+
+[[package]]
+name = "poseidon-md-core"
+version = "0.1.0"
+source = { virtual = "packages/core" }
 
 [[package]]
 name = "prek"
@@ -153,8 +134,3 @@ sdist = { url = "https://files.pythonhosted.org/packages/72/94/1a15dd82efb362ac8
 wheels = [
     { url = "https://files.pythonhosted.org/packages/18/67/36e9267722cc04a6b9f15c7f3441c2363321a3ea07da7ae0c0707beb2a9c/typing_extensions-4.15.0-py3-none-any.whl", hash = "sha256:f0fa19c6845758ab08074a0cfa8b7aecb71c999ca73d62883bc25cc018c4e548", size = 44614, upload-time = "2025-08-25T13:49:24.86Z" },
 ]
-
-[[package]]
-name = "worker"
-version = "0.1.0"
-source = { virtual = "services/worker" }
