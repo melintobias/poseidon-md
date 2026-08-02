@@ -1,20 +1,12 @@
 version: "0.2"
-dictionaries:
-  - python
 minWordLength: 0
-words:
-  - absl
-  - dlx
-  - dunder
-  - EDITMSG
-  - fmt
-  - fn
-  - PLE
-  - PLR
-  - PLW
-  - preexec
-  - prek
-  - pyi
-  - rgx
-  - uvx
-  - WIP
+dictionaries:
+  - project-dictionary
+  - python
+dictionaryDefinitions:
+  - name: project-dictionary
+    path: ./.cspell/project-dictionary.txt
+    addWords: true
+ignorePaths:
+  - pnpm-lock.yaml
+  - uv.lock
