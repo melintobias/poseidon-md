@@ -2,12 +2,19 @@ convention:
   commitTypes:
     - feat # Commits that add or remove features
     - fix # Commits that fix bugs
-    - refactor # Commits that rewrite or restructure code without changing its behavior
+    # Commits that rewrite or restructure code without changing its behavior
+    - refactor
     - perf # Commits that improve performance
-    - style # Commits that do not affect the meaning of code (whitespace, formatting, missing semicolons etc.)
+    # Commits that do not affect the meaning of code (whitespace, formatting,
+    # missing semicolons etc.)
+    - style
     - test # Commits that add missing or correct existing tests
-    - build # Commits that affect build components (build tools, CI pipeline, dependencies, project versions etc.)
-    - ops # Commits that affect operational components (infrastructure, deployment, backup, recovery etc.)
+    # Commits that affect build components (build tools, CI pipeline,
+    # dependencies, project versions etc.)
+    - build
+    # Commits that affect operational components (infrastructure, deployment,
+    # backup, recovery etc.)
+    - ops
     - docs # Commits that affect documentation only
     - chore # Miscellaneous commits (`.gitignore` etc.)
     - merge # Commits that merge branches
