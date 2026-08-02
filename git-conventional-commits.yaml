@@ -6,17 +6,17 @@ convention:
     - refactor
     - perf # Commits that improve performance
     # Commits that do not affect the meaning of code (whitespace, formatting,
-    # missing semicolons etc.)
+    # missing semicolons, etc.)
     - style
     - test # Commits that add missing or correct existing tests
     # Commits that affect build components (build tools, CI pipeline,
-    # dependencies, project versions etc.)
+    # dependencies, project versions, etc.)
     - build
     # Commits that affect operational components (infrastructure, deployment,
-    # backup, recovery etc.)
+    # backup, recovery, etc.)
     - ops
     - docs # Commits that affect documentation only
-    - chore # Miscellaneous commits (`.gitignore` etc.)
+    - chore # Miscellaneous commits (`.gitignore`, etc.)
     - merge # Commits that merge branches
     - revert # Commits that revert previous commits
   commitScopes: [api, assets, cli, core, config, db, deps, frontend, worker]
