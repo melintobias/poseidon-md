@@ -7,7 +7,7 @@
 Poseidon-MD uses [uv](https://docs.astral.sh/uv/) for Python environment and
 dependency management.
 
-```bash
+```sh
 uv sync
 ```
 
@@ -17,7 +17,7 @@ Poseidon-MD uses [prek](https://prek.j178.dev/) alongside [Ruff](https://github.
 [Pyright](https://github.com/microsoft/pyright), and [git-conventional-commits](https://github.com/qoomon/git-conventional-commits), to manage Git hooks for code quality and commit
 message checks.
 
-```bash
+```sh
 prek install --hook-type commit-msg --overwrite
 ```
 
@@ -25,6 +25,6 @@ prek install --hook-type commit-msg --overwrite
 > If the `prek` command is not found, a possible workaround is to install it
 > manually from PyPI: <https://pypi.org/project/prek/> or using `uv`:
 >
-> ```bash
+> ```sh
 > uvx prek install --hook-type commit-msg --overwrite
 > ```
