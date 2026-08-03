@@ -12,7 +12,7 @@ members = ["packages/*", "services/*"]
 [tool.ruff]
 preview = true
 fix = true
-exclude = ["third_party"]
+exclude = ["third-party"]
 line-length = 80
 
 [tool.ruff.format]
