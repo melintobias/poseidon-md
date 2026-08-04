@@ -19,7 +19,17 @@ convention:
     - chore # Miscellaneous commits (`.gitignore`, etc.)
     - merge # Commits that merge branches
     - revert # Commits that revert previous commits
-  commitScopes: [api, assets, cli, contrib, core, config, db, dep, frontend, worker]
+  commitScopes:
+    - api # API changes.
+    - assets # Static project asset changes.
+    - cli # Command-line interface changes.
+    - contrib # `CONTRIBUTING.md` changes.
+    - core # Core changes.
+    - config # Project configuration changes.
+    - db # Database changes.
+    - dep # Project dependency changes.
+    - frontend # Frontend changes.
+    - worker # Background worker changes.
   releaseTagGlobPattern: v[0-9]*.[0-9]*.[0-9]*
 changelog:
   commitTypes:
