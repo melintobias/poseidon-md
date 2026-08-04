@@ -1,14 +1,14 @@
 {
-  "name": "poseidon-md",
-  "version": "0.1.0",
-  "description": "Poseidon-MD: An end-to-end audio acquisition tool that extracts audio from online sources, resolves metadata, and outputs properly tagged files in MP3 and more.",
-  "main": "index.js",
-  "author": "Tobias Melin <tobias.melin@proton.me>",
-  "license": "ISC",
-  "packageManager": "pnpm@10.33.0",
-  "devDependencies": {
-    "prettier": "^3.9.6",
-    "prettier-plugin-toml": "^2.0.6",
-    "pretty-quick": "^4.2.2"
-  }
+	"name": "poseidon-md",
+	"version": "0.1.0",
+	"description": "Poseidon-MD: An end-to-end audio acquisition tool that extracts audio from online sources, resolves metadata, and outputs properly tagged files in MP3 and more.",
+	"main": "index.js",
+	"author": "Tobias Melin <tobias.melin@proton.me>",
+	"license": "ISC",
+	"packageManager": "pnpm@10.33.0",
+	"devDependencies": {
+		"prettier": "^3.9.6",
+		"prettier-plugin-toml": "^2.0.6",
+		"pretty-quick": "^4.2.2"
+	}
 }
