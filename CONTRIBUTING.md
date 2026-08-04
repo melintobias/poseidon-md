@@ -34,7 +34,7 @@ prek install --hook-type commit-msg --overwrite
 
 > [!TIP]
 > If the `prek` command is not found, a possible workaround is to install it
-> manually from PyPI: <https://pypi.org/project/prek/> or using `uv`:
+> manually from [PyPI](https://pypi.org/project/prek/) or using `uv`:
 >
 > ```sh
 > uvx prek install --hook-type commit-msg --overwrite
