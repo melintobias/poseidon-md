@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"author": "Tobias Melin <tobias.melin@proton.me>",
 	"license": "ISC",
-	"packageManager": "pnpm@10.33.0",
+	"packageManager": "pnpm@11.19.0",
 	"devDependencies": {
 		"prettier": "^3.9.6",
 		"prettier-plugin-toml": "^2.0.6",
