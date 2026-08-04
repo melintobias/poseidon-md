@@ -2,7 +2,7 @@
 
 ## Environment setup
 
-### 1. Install dependencies
+### 1. Install Python dependencies
 
 Poseidon-MD uses [uv](https://docs.astral.sh/uv/) for Python environment and
 dependency management.
@@ -11,7 +11,16 @@ dependency management.
 uv sync
 ```
 
-### 2. Install pre-commit hooks
+### 2. Install Node.js dependencies
+
+Poseidon-MD uses [pnpm](https://pnpm.io/) for Node.js-based development tools,
+including Prettier.
+
+```sh
+pnpm install --frozen-lockfile
+```
+
+### 3. Install pre-commit hooks
 
 Poseidon-MD uses [prek](https://prek.j178.dev/) alongside
 [Ruff](https://github.com/astral-sh/ruff),
