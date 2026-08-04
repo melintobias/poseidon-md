@@ -7,7 +7,7 @@
   "license": "ISC",
   "packageManager": "pnpm@10.33.0",
   "devDependencies": {
-    "prettier": "^3.8.3",
+    "prettier": "^3.9.6",
     "prettier-plugin-toml": "^2.0.6",
     "pretty-quick": "^4.2.2"
   }
