@@ -1,0 +1,14 @@
+{
+    "recommendations": [
+        "astral-sh.ty",
+        "shardulm94.trailing-spaces",
+        "charliermarsh.ruff",
+        "ms-python.vscode-python-envs",
+        "ms-python.debugpy",
+        "ms-python.python",
+        "editorconfig.editorconfig",
+        "vivaxy.vscode-conventional-commits",
+        "streetsidesoftware.code-spell-checker",
+        "tamasfe.even-better-toml"
+    ]
+}
