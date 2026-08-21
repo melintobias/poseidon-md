@@ -1,4 +1,4 @@
-# Development
+# Contributing
 
 ## Environment setup
 
