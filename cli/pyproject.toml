@@ -1,0 +1,21 @@
+[project]
+name = "poseidon-md-cli"
+version = "0.1.0"
+description = "The command-line interface for Poseidon-MD."
+requires-python = ">=3.14"
+dependencies = [
+    "poseidon-md-core",
+    "pydantic>=2.13.4",
+    "rich>=15.0.0",
+    "typer>=0.27.1",
+]
+
+[tool.uv.sources]
+poseidon-md-core = { workspace = true }
+
+[project.scripts]
+poseidon-md = "poseidon_md_cli.main:app"
+
+[build-system]
+requires = ["uv_build>=0.12.1,<0.13.0"]
+build-backend = "uv_build"
