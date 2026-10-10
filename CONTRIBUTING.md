@@ -8,8 +8,11 @@ Poseidon-MD uses [uv](https://docs.astral.sh/uv/) for Python environment and
 dependency management.
 
 ```sh
-uv sync
+uv sync --all-packages
 ```
+
+The `--all-packages` option installs the core workspace member, including its
+concrete adapter dependencies.
 
 ### 2. Install Node.js dependencies
 
