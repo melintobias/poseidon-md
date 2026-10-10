@@ -13,3 +13,10 @@ of its terminal presentation. Pipeline stages receive the application logger
 through shared storage. Normal events are logged at the info level, skipped
 inputs at the warning level, and per-input diagnostic events are enabled with
 the CLI's `--debug` option.
+
+The source acquisition stage processes validated URLs sequentially. For each
+URL, its blackboard-provided `SourceAcquirer` extracts source metadata and
+downloads the media in one operation. Successful results become immutable
+`Track` values in shared storage so later stages do not depend on yt-dlp data
+structures. Individual failures are logged and skipped; a nonempty batch in
+which every acquisition fails terminates the pipeline.

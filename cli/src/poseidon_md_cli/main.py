@@ -2,9 +2,11 @@
 
 from typing import Annotated
 
+from poseidon_md_core.adapters import YtDlpSourceAcquirer
 import typer
 
 from .logger import configure_logger
+from .pipeline import ExtractionStage
 from .pipeline import IntakeStage
 from .pipeline import PipelineStage
 from .pipeline.types import PipelineSharedStorage
@@ -15,8 +17,9 @@ app = typer.Typer()
 
 stages: list[type[PipelineStage]] = [
     IntakeStage,
+    ExtractionStage,
 ]
-"""Intake stage run by the current command-line application."""
+"""Ordered pipeline stages run by the command-line application."""
 
 
 @app.command()
@@ -47,6 +50,7 @@ def main(
         logger=configure_logger(debug=debug),
         input_urls=urls or [],
         welcome_on_no_urls=welcome,
+        source_acquirer=YtDlpSourceAcquirer(),
     )
     orchestrator = StageOrchestrator(stages, shared_storage=shared_storage)
     orchestrator.run()
