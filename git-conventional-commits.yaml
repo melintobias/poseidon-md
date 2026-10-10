@@ -24,6 +24,7 @@ convention:
     - assets # Static project asset changes.
     - cli # Command-line interface changes.
     - contrib # `CONTRIBUTING.md` changes.
+    - readme # `README.md` changes.
     - core # Core changes.
     - config # Project configuration changes.
     - db # Database changes.
