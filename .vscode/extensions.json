@@ -9,6 +9,7 @@
         "editorconfig.editorconfig",
         "vivaxy.vscode-conventional-commits",
         "streetsidesoftware.code-spell-checker",
-        "tamasfe.even-better-toml"
+        "tamasfe.even-better-toml",
+        "esbenp.prettier-vscode"
     ]
 }
