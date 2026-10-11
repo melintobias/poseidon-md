@@ -27,7 +27,7 @@ LOGGER.addHandler(RICH_HANDLER)
 LOGGER.propagate = False
 
 
-def configure_logger(*, debug: bool = False) -> logging.Logger:
+def get_logger(*, debug: bool = False) -> logging.Logger:
     """Configure and return the shared application logger.
 
     Args:

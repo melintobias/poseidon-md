@@ -7,7 +7,7 @@ from typer import Argument
 from typer import Option
 from typer import Typer
 
-from .logger import configure_logger
+from .logger import get_logger
 from .pipeline import ExtractionStage
 from .pipeline import IntakeStage
 from .pipeline import PipelineStage
@@ -49,7 +49,7 @@ def main(
             provided.
     """
     shared_storage = PipelineSharedStorage(
-        logger=configure_logger(debug=debug),
+        logger=get_logger(debug=debug),
         input_urls=urls or [],
         welcome=welcome,
         source_acquirer=YtDlpSourceAcquirer(),
