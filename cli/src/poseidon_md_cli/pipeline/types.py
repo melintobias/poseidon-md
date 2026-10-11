@@ -22,7 +22,7 @@ class PipelineSharedStorage:
 
     Attributes:
         input_urls: Raw URL strings supplied through the command line.
-        welcome_on_no_urls: Whether intake should greet and prompt when empty.
+        welcome: Whether intake should greet and prompt when empty.
         logger: Application logger used to report pipeline events.
         urls: URLs accepted by the intake stage.
         source_acquirer: Optional provider-neutral source acquisition service.
@@ -30,7 +30,7 @@ class PipelineSharedStorage:
     """
 
     input_urls: list[str] = field(default_factory=list)
-    welcome_on_no_urls: bool = field(default=True)
+    welcome: bool = field(default=True)
 
     logger: Logger = field(default=LOGGER)
 

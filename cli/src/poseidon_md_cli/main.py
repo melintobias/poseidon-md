@@ -49,7 +49,7 @@ def main(
     shared_storage = PipelineSharedStorage(
         logger=configure_logger(debug=debug),
         input_urls=urls or [],
-        welcome_on_no_urls=welcome,
+        welcome=welcome,
         source_acquirer=YtDlpSourceAcquirer(),
     )
     orchestrator = StageOrchestrator(stages, shared_storage=shared_storage)
