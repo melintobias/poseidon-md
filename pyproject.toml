@@ -75,8 +75,8 @@ select = [
 	"TRY",
 ]
 ignore = [
-	"CPY001", # missing-copyright-notice
 	"COM812", # missing-trailing-comma
+	"CPY001", # missing-copyright-notice
 	"DOC502", # docstring-extraneous-exception
 	"EM101",  # raw-string-in-exception
 	"TRY003", # raise-vanilla-args
