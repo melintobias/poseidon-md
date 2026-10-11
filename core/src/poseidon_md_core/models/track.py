@@ -64,8 +64,7 @@ class TrackSource:
         """
         _require_non_blank(self.url, "source URL")
         _validate_optional_non_blank(
-            self.normalized_url,
-            "normalized source URL",
+            self.normalized_url, "normalized source URL"
         )
         _validate_optional_non_blank(self.provider, "source provider")
         _validate_optional_non_blank(self.source_id, "source ID")
@@ -317,9 +316,7 @@ class MetadataLookupResult:
 
     @classmethod
     def succeeded(
-        cls,
-        provider: str,
-        candidates: tuple[MetadataCandidate, ...],
+        cls, provider: str, candidates: tuple[MetadataCandidate, ...]
     ) -> Self:
         """Create a successful provider result.
 
@@ -366,9 +363,7 @@ class MetadataLookupResult:
                 ValueError: If the provider or error is blank.
         """
         return cls(
-            provider=provider,
-            status=MetadataLookupStatus.FAILED,
-            error=error,
+            provider=provider, status=MetadataLookupStatus.FAILED, error=error
         )
 
 
@@ -576,8 +571,7 @@ class Track:
         return replace(
             self,
             metadata=TrackMetadata(
-                extracted=self.metadata.extracted,
-                cleaned=candidate,
+                extracted=self.metadata.extracted, cleaned=candidate
             ),
             artifacts=_without_published_outputs(self.artifacts),
         )
@@ -626,10 +620,7 @@ class Track:
         Returns:
                 A new track containing the download with later outputs cleared.
         """
-        return replace(
-            self,
-            artifacts=TrackArtifacts(downloaded=artifact),
-        )
+        return replace(self, artifacts=TrackArtifacts(downloaded=artifact))
 
     def add_transformed_artifact(self, artifact: MediaArtifact) -> Self:
         """Return a copy with an additional transformed artifact.
@@ -660,7 +651,6 @@ class Track:
         return replace(
             self,
             artifacts=replace(
-                self.artifacts,
-                stored=(*self.artifacts.stored, artifact),
+                self.artifacts, stored=(*self.artifacts.stored, artifact)
             ),
         )

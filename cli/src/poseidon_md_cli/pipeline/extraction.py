@@ -26,10 +26,7 @@ class ExtractionStage(PipelineStage):
             shared_storage: Existing pipeline storage, or `None` to create
                 empty storage for this run.
         """
-        StageOrchestrator(
-            [ExtractUrls],
-            shared_storage,
-        ).run()
+        StageOrchestrator([ExtractUrls], shared_storage).run()
 
 
 class ExtractUrls(PipelineStage):
@@ -37,9 +34,7 @@ class ExtractUrls(PipelineStage):
 
     @classmethod
     def get_source_acquirer(
-        cls,
-        shared_storage: PipelineSharedStorage,
-        total_urls: int,
+        cls, shared_storage: PipelineSharedStorage, total_urls: int
     ) -> SourceAcquirer | None:
         """Return configured source acquirer or handle empty-url no-op case.
 
@@ -92,12 +87,7 @@ class ExtractUrls(PipelineStage):
         )
         for index, url in enumerate(tracked_urls, start=1):
             source_url = str(url)
-            logger.debug(
-                "%d/%d Acquiring: %s",
-                index,
-                total_urls,
-                source_url,
-            )
+            logger.debug("%d/%d Acquiring: %s", index, total_urls, source_url)
 
             try:
                 acquisition = source_acquirer.acquire(source_url)
@@ -112,10 +102,10 @@ class ExtractUrls(PipelineStage):
 
             acquired_track = Track(source=acquisition.source)
             acquired_track = acquired_track.with_extracted_metadata(
-                acquisition.metadata,
+                acquisition.metadata
             )
             acquired_track = acquired_track.with_downloaded_artifact(
-                acquisition.artifact,
+                acquisition.artifact
             )
             acquired_tracks.append(acquired_track)
             logger.info(

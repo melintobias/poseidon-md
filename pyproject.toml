@@ -18,6 +18,7 @@ line-length = 80
 [tool.ruff.format]
 preview = true
 docstring-code-format = true
+skip-magic-trailing-comma = true
 
 [tool.ruff.lint]
 preview = true
@@ -75,6 +76,7 @@ select = [
 ]
 ignore = [
 	"CPY001", # missing-copyright-notice
+	"COM812", # missing-trailing-comma
 	"DOC502", # docstring-extraneous-exception
 	"EM101",  # raw-string-in-exception
 	"TRY003", # raise-vanilla-args

@@ -17,10 +17,7 @@ from .pipeline.types import StageOrchestrator
 app = Typer()
 """Typer application exposed by the `poseidon-md` command."""
 
-stages: list[type[PipelineStage]] = [
-    IntakeStage,
-    ExtractionStage,
-]
+stages: list[type[PipelineStage]] = [IntakeStage, ExtractionStage]
 """Ordered pipeline stages run by the command-line application."""
 
 
@@ -29,8 +26,7 @@ def main(
     urls: Annotated[list[str] | None, Argument()] = None,
     *,
     debug: Annotated[
-        bool,
-        Option("--debug", "-d", help="Show diagnostic logging."),
+        bool, Option("--debug", "-d", help="Show diagnostic logging.")
     ] = False,
     no_prompt: Annotated[
         bool,

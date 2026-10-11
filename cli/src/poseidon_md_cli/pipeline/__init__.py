@@ -4,9 +4,5 @@ from .extraction import ExtractionStage
 from .intake import IntakeStage
 from .types import PipelineStage
 
-__all__ = [
-    "ExtractionStage",
-    "IntakeStage",
-    "PipelineStage",
-]
+__all__ = ["ExtractionStage", "IntakeStage", "PipelineStage"]
 """Names supported as the pipeline package's public interface."""

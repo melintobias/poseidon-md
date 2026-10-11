@@ -136,7 +136,7 @@ class YtDlpSourceAcquirer:
         if self.download_directory is not None:
             options["paths"] = {
                 # Place the artifact in the configured directory.
-                "home": str(self.download_directory),
+                "home": str(self.download_directory)
             }
 
         return options
@@ -169,8 +169,7 @@ def _source_acquisition(url: str, info: YtDlpInfo) -> SourceAcquisition:
             source_id=source_id,
         ),
         metadata=MetadataCandidate(
-            provider=YT_DLP_PROVIDER,
-            metadata=_metadata_record(info),
+            provider=YT_DLP_PROVIDER, metadata=_metadata_record(info)
         ),
         artifact=MediaArtifact(
             path=artifact_path,
@@ -192,12 +191,7 @@ def _metadata_record(info: YtDlpInfo) -> MetadataRecord:
     """
     artists = _text_tuple(info.get("artists"))
     if not artists:
-        artists = _first_text_tuple(
-            info,
-            "artist",
-            "creator",
-            "uploader",
-        )
+        artists = _first_text_tuple(info, "artist", "creator", "uploader")
 
     return MetadataRecord(
         title=_first_text(info, "track", "title"),
@@ -232,8 +226,7 @@ def _downloaded_filepath(info: YtDlpInfo) -> Path:
     """
     requested_downloads = info.get("requested_downloads")
     if isinstance(requested_downloads, Sequence) and not isinstance(
-        requested_downloads,
-        (str, bytes),
+        requested_downloads, (str, bytes)
     ):
         for requested_download in requested_downloads:
             if not isinstance(requested_download, Mapping):

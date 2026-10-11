@@ -78,10 +78,7 @@ def get_logger(*, debug: bool = False) -> logging.Logger:
 
 
 def log_stage_completion(
-    logger: logging.Logger,
-    level: int,
-    message: object,
-    *args: object,
+    logger: logging.Logger, level: int, message: object, *args: object
 ) -> None:
     """Log a stage outcome and separate it from following terminal output.
 

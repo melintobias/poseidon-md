@@ -41,10 +41,7 @@ class IntakeStage(PipelineStage):
             shared_storage.logger.info("No input URLs provided; exiting.")
             raise SystemExit(0)
 
-        StageOrchestrator(
-            [InputStage, ValidateUrls],
-            shared_storage,
-        ).run()
+        StageOrchestrator([InputStage, ValidateUrls], shared_storage).run()
 
 
 class InputStage(PipelineStage):
@@ -59,7 +56,7 @@ class InputStage(PipelineStage):
         welcome()
 
         shared_storage.logger.debug(
-            "No input URLs provided; prompting for input.",
+            "No input URLs provided; prompting for input."
         )
         urls = Prompt.ask("Please enter URLs separated by spaces")
         shared_storage.input_urls = urls.split()
@@ -97,10 +94,7 @@ class ValidateUrls(PipelineStage):
 
             if (validated_url := validate_url(url)) is None:
                 logger.error(
-                    "%d/%d Invalid URL skipped: %s",
-                    index,
-                    total_urls,
-                    url,
+                    "%d/%d Invalid URL skipped: %s", index, total_urls, url
                 )
                 continue
 
@@ -114,12 +108,7 @@ class ValidateUrls(PipelineStage):
                 continue
 
             validated_urls.append(validated_url)
-            logger.info(
-                "%d/%d Valid URL: %s",
-                index,
-                total_urls,
-                validated_url,
-            )
+            logger.info("%d/%d Valid URL: %s", index, total_urls, validated_url)
 
         shared_storage.urls = tuple(validated_urls)
 
@@ -143,8 +132,7 @@ class ValidateUrls(PipelineStage):
 
         if total_failure:
             logger.critical(
-                "All %d unique URLs were invalid; exiting.",
-                total_unique_urls,
+                "All %d unique URLs were invalid; exiting.", total_unique_urls
             )
             raise SystemExit(1)
 
