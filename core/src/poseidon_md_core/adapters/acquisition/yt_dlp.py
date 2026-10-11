@@ -27,6 +27,35 @@ type YtDlpInfo = Mapping[str, object]
 """Resolved information dictionary returned by yt-dlp for one media item."""
 
 
+class QuietYtDlpLogger:
+    """Silence yt-dlp output so the calling application reports failures once.
+
+    The adapter raises yt-dlp failures to its caller, which owns user-facing
+    logging. This logger prevents yt-dlp from writing the same failure first.
+    """
+
+    def debug(self, message: str) -> None:
+        """Discard a diagnostic message emitted by yt-dlp.
+
+        Args:
+            message: Diagnostic text that is intentionally not displayed.
+        """
+
+    def warning(self, message: str) -> None:
+        """Discard a warning emitted by yt-dlp.
+
+        Args:
+            message: Warning text that is intentionally not displayed.
+        """
+
+    def error(self, message: str) -> None:
+        """Discard an error message that will be raised to the caller.
+
+        Args:
+            message: Error text represented by the raised acquisition error.
+        """
+
+
 class MissingDownloadedFilepathError(ValueError):
     """Indicate that yt-dlp returned no path for the downloaded artifact."""
 
@@ -99,6 +128,8 @@ class YtDlpSourceAcquirer:
             "quiet": True,
             # Surface failures through exceptions rather than warning text.
             "no_warnings": True,
+            # Let the caller report errors once through its application logger.
+            "logger": QuietYtDlpLogger(),
             # Name temporary source artifacts independently of mutable titles.
             "outtmpl": DEFAULT_OUTPUT_TEMPLATE,
         }
