@@ -27,7 +27,19 @@ class IntakeStage(PipelineStage):
         Args:
             shared_storage: Existing pipeline storage, or `None` to create
                 empty storage for this run.
+
+        Raises:
+            SystemExit: If no input URLs are provided and the `no_prompt` option
+                is set.
         """
+        if (
+            shared_storage
+            and shared_storage.no_prompt
+            and not shared_storage.input_urls
+        ):
+            shared_storage.logger.info("No input URLs provided; exiting.")
+            raise SystemExit(0)
+
         StageOrchestrator(
             [InputStage, ValidateUrls],
             shared_storage,

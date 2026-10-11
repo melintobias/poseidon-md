@@ -32,26 +32,29 @@ def main(
         bool,
         Option("--debug", "-d", help="Show diagnostic logging."),
     ] = False,
-    welcome: Annotated[
+    no_prompt: Annotated[
         bool,
         Option(
-            "--welcome",
-            help="Show a welcome message when no URLs are provided.",
+            "--no-prompt",
+            help=(
+                "Exit when no URLs are provided, instead of prompting for "
+                "input."
+            ),
         ),
-    ] = True,
+    ] = False,
 ) -> None:
     """Process the supplied media URLs through the Poseidon pipeline.
 
     Args:
         urls: Source URLs to process.
         debug: Whether to include diagnostic debug records.
-        welcome: Whether to show a welcome message when no URLs are
-            provided.
+        no_prompt: Whether to exit when no URLs are provided, instead of
+            prompting for input.
     """
     shared_storage = PipelineSharedStorage(
         logger=get_logger(debug=debug),
         input_urls=urls or [],
-        welcome=welcome,
+        no_prompt=no_prompt,
         source_acquirer=YtDlpSourceAcquirer(),
     )
     orchestrator = StageOrchestrator(stages, shared_storage)
