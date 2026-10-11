@@ -26,10 +26,8 @@ class ExtractionStage(PipelineStage):
                 empty storage for this run.
         """
         StageOrchestrator(
-            [
-                ExtractUrls,
-            ],
-            shared_storage=shared_storage,
+            [ExtractUrls],
+            shared_storage,
         ).run()
 
 

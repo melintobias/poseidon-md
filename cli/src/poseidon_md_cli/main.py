@@ -54,7 +54,7 @@ def main(
         welcome=welcome,
         source_acquirer=YtDlpSourceAcquirer(),
     )
-    orchestrator = StageOrchestrator(stages, shared_storage=shared_storage)
+    orchestrator = StageOrchestrator(stages, shared_storage)
     orchestrator.run()
 
 

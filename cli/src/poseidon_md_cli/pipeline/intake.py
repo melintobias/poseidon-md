@@ -29,11 +29,8 @@ class IntakeStage(PipelineStage):
                 empty storage for this run.
         """
         StageOrchestrator(
-            [
-                InputStage,
-                ValidateUrls,
-            ],
-            shared_storage=shared_storage,
+            [InputStage, ValidateUrls],
+            shared_storage,
         ).run()
 
 
