@@ -59,7 +59,7 @@ class StageOrchestrator:
     """Run an ordered collection of stages against shared storage.
 
     Attributes:
-        stages: Instantiated stages in their execution order.
+        stages: Stage classes in their execution order.
         storage: State and services shared by the stages.
     """
 
@@ -71,13 +71,13 @@ class StageOrchestrator:
         """Initialize a pipeline stage sequence.
 
         Args:
-            stages: Stage types to instantiate in execution order.
+            stages: Stage classes to instantiate in execution order.
             shared_storage: Existing shared storage, or `None` to create it.
         """
-        self.stages: list[PipelineStage] = [stage() for stage in stages]
+        self.stages = list(stages)
         self.storage = shared_storage or PipelineSharedStorage()
 
     def run(self) -> None:
         """Run every configured stage in order."""
         for stage in self.stages:
-            stage.run(self.storage)
+            stage().run(self.storage)
