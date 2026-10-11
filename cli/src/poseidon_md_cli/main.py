@@ -3,7 +3,9 @@
 from typing import Annotated
 
 from poseidon_md_core.adapters import YtDlpSourceAcquirer
-import typer
+from typer import Argument
+from typer import Option
+from typer import Typer
 
 from .logger import configure_logger
 from .pipeline import ExtractionStage
@@ -12,7 +14,7 @@ from .pipeline import PipelineStage
 from .pipeline.types import PipelineSharedStorage
 from .pipeline.types import StageOrchestrator
 
-app = typer.Typer()
+app = Typer()
 """Typer application exposed by the `poseidon-md` command."""
 
 stages: list[type[PipelineStage]] = [
@@ -24,15 +26,15 @@ stages: list[type[PipelineStage]] = [
 
 @app.command()
 def main(
-    urls: Annotated[list[str] | None, typer.Argument()] = None,
+    urls: Annotated[list[str] | None, Argument()] = None,
     *,
     debug: Annotated[
         bool,
-        typer.Option("--debug", "-d", help="Show diagnostic logging."),
+        Option("--debug", "-d", help="Show diagnostic logging."),
     ] = False,
     welcome: Annotated[
         bool,
-        typer.Option(
+        Option(
             "--welcome",
             help="Show a welcome message when no URLs are provided.",
         ),
