@@ -470,7 +470,10 @@ class MediaArtifact:
         """Return the preferred portable artifact location.
 
         Returns:
-                The remote URI when present, otherwise the local path as text.
+            The remote URI when present, otherwise the local path as text.
+
+        Raises:
+            RuntimeError: If the artifact has no location.
         """
         if self.uri is not None:
             return self.uri
