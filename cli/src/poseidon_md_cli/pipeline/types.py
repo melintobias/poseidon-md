@@ -71,6 +71,9 @@ class StageOrchestrator:
     ) -> None:
         """Initialize a pipeline stage sequence.
 
+        The stage list is shallow-copied, so later edits to the caller's list do
+        not change this orchestrator's sequence.
+
         Args:
             stages: Stage classes to instantiate in execution order.
             shared_storage: Existing shared storage, or `None` to create it.
