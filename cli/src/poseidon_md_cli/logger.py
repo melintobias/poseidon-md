@@ -36,6 +36,5 @@ def configure_logger(*, debug: bool = False) -> logging.Logger:
     Returns:
         The configured shared application logger.
     """
-
     LOGGER.setLevel(logging.INFO if not debug else logging.DEBUG)
     return LOGGER

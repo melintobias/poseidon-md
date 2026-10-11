@@ -1,29 +1,33 @@
 """Validate, deduplicate, and report URLs entering the CLI pipeline."""
 
 import logging
+import typing
 
 from poseidon_md_core.pipeline.intake import validate_url
-from pydantic import AnyUrl
 from rich.progress import track
 from rich.prompt import Prompt
 
-from ..logger import CONSOLE
+from poseidon_md_cli.logger import CONSOLE
+
 from .types import PipelineSharedStorage
 from .types import PipelineStage
 from .types import StageOrchestrator
+
+if typing.TYPE_CHECKING:
+    from pydantic import AnyUrl
 
 
 class IntakeStage(PipelineStage):
     """Coordinate the URL validation work performed during intake."""
 
-    def run(self, shared_storage: PipelineSharedStorage | None = None) -> None:
+    @classmethod
+    def run(cls, shared_storage: PipelineSharedStorage | None = None) -> None:
         """Run all URL intake steps against shared pipeline storage.
 
         Args:
             shared_storage: Existing pipeline storage, or `None` to create
                 empty storage for this run.
         """
-
         StageOrchestrator(
             [
                 InputStage,
@@ -34,30 +38,37 @@ class IntakeStage(PipelineStage):
 
 
 class InputStage(PipelineStage):
-    def run(self, shared_storage: PipelineSharedStorage) -> None:
+    """Prompt for input URLs if none were supplied on the command line."""
+
+    @classmethod
+    def run(cls, shared_storage: PipelineSharedStorage) -> None:
+        """Prompt for input URLs if none were supplied on the command line."""
         if shared_storage.input_urls:
             return
 
         welcome()
 
         shared_storage.logger.debug(
-            "No input URLs provided; prompting for input."
+            "No input URLs provided; prompting for input.",
         )
-        input = Prompt.ask("Please enter URLs separated by spaces")
-        shared_storage.input_urls = input.split()
+        urls = Prompt.ask("Please enter URLs separated by spaces")
+        shared_storage.input_urls = urls.split()
 
 
 class ValidateUrls(PipelineStage):
     """Validate and deduplicate supplied URLs."""
 
-    def run(self, shared_storage: PipelineSharedStorage) -> None:
+    @classmethod
+    def run(cls, shared_storage: PipelineSharedStorage) -> None:
         """Store valid URLs.
 
         Args:
             shared_storage: Pipeline storage containing the input URLs and
                 receiving the validated URL set.
-        """
 
+        Raises:
+            SystemExit: If all input URLs are invalid.
+        """
         logger = shared_storage.logger
 
         validated_urls: list[AnyUrl] = []
@@ -131,6 +142,5 @@ class ValidateUrls(PipelineStage):
 
 def welcome() -> None:
     """Render a welcome message to the console."""
-
     # TODO: Improve welcome message
     CONSOLE.print("[bold green]Welcome to Poseidon-MD![/bold green]\n")

@@ -3,10 +3,12 @@
 import logging
 
 from poseidon_md_core import Track
+from poseidon_md_core.ports import SourceAcquirer
 from poseidon_md_core.ports import SourceAcquisitionError
 from rich.progress import track
 
-from ..logger import CONSOLE
+from poseidon_md_cli.logger import CONSOLE
+
 from .types import PipelineSharedStorage
 from .types import PipelineStage
 from .types import StageOrchestrator
@@ -15,14 +17,14 @@ from .types import StageOrchestrator
 class ExtractionStage(PipelineStage):
     """Coordinate sequential source extraction and download work."""
 
-    def run(self, shared_storage: PipelineSharedStorage | None = None) -> None:
+    @classmethod
+    def run(cls, shared_storage: PipelineSharedStorage | None = None) -> None:
         """Run source acquisition steps against shared pipeline storage.
 
         Args:
             shared_storage: Existing pipeline storage, or `None` to create
                 empty storage for this run.
         """
-
         StageOrchestrator(
             [
                 ExtractUrls,
@@ -34,19 +36,24 @@ class ExtractionStage(PipelineStage):
 class ExtractUrls(PipelineStage):
     """Acquire validated URLs sequentially through the configured service."""
 
+    @classmethod
     def get_source_acquirer(
-        self,
+        cls,
         shared_storage: PipelineSharedStorage,
         total_urls: int,
-    ):
-        """Return configured source acquirer or handle empty-url no-op case."""
+    ) -> SourceAcquirer | None:
+        """Return configured source acquirer or handle empty-url no-op case.
 
+        Raises:
+            RuntimeError: If URLs exist without a configured acquisition
+                service.
+        """
         source_acquirer = shared_storage.source_acquirer
         if source_acquirer is None:
             if total_urls == 0:
                 shared_storage.tracks = ()
                 shared_storage.logger.info(
-                    "Source acquisition completed (0/0 URLs acquired)"
+                    "Source acquisition completed (0/0 URLs acquired)",
                 )
                 return None
 
@@ -54,7 +61,8 @@ class ExtractUrls(PipelineStage):
 
         return source_acquirer
 
-    def run(self, shared_storage: PipelineSharedStorage) -> None:
+    @classmethod
+    def run(cls, shared_storage: PipelineSharedStorage) -> None:
         """Store tracks containing extracted metadata and downloaded media.
 
         Args:
@@ -66,14 +74,13 @@ class ExtractUrls(PipelineStage):
                 service.
             SystemExit: If every supplied URL fails acquisition.
         """
-
         logger = shared_storage.logger
 
         acquired_tracks: list[Track] = []
         total_urls = len(shared_storage.urls)
         logger.info("Source acquisition started (%d URLs)", total_urls)
 
-        source_acquirer = self.get_source_acquirer(shared_storage, total_urls)
+        source_acquirer = cls.get_source_acquirer(shared_storage, total_urls)
         if source_acquirer is None:
             return
 
@@ -95,22 +102,21 @@ class ExtractUrls(PipelineStage):
 
             try:
                 acquisition = source_acquirer.acquire(source_url)
-            except SourceAcquisitionError as error:
-                logger.error(
-                    "%d/%d Source acquisition failed for %s: %s",
+            except SourceAcquisitionError:
+                logger.exception(
+                    "%d/%d Source acquisition failed for %s",
                     index,
                     total_urls,
                     source_url,
-                    error,
                 )
                 continue
 
             acquired_track = Track(source=acquisition.source)
             acquired_track = acquired_track.with_extracted_metadata(
-                acquisition.metadata
+                acquisition.metadata,
             )
             acquired_track = acquired_track.with_downloaded_artifact(
-                acquisition.artifact
+                acquisition.artifact,
             )
             acquired_tracks.append(acquired_track)
             logger.info(

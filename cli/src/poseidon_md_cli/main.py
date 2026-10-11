@@ -25,6 +25,7 @@ stages: list[type[PipelineStage]] = [
 @app.command()
 def main(
     urls: Annotated[list[str] | None, typer.Argument()] = None,
+    *,
     debug: Annotated[
         bool,
         typer.Option("--debug", "-d", help="Show diagnostic logging."),
@@ -45,7 +46,6 @@ def main(
         welcome: Whether to show a welcome message when no URLs are
             provided.
     """
-
     shared_storage = PipelineSharedStorage(
         logger=configure_logger(debug=debug),
         input_urls=urls or [],

@@ -4,14 +4,16 @@ from abc import ABC
 from abc import abstractmethod
 from dataclasses import dataclass
 from dataclasses import field
-from logging import Logger
-from typing import Any
+from typing import TYPE_CHECKING
 
-from poseidon_md_core import Track
-from poseidon_md_core.ports import SourceAcquirer
-from pydantic import AnyUrl
+from poseidon_md_cli.logger import LOGGER
 
-from ..logger import LOGGER
+if TYPE_CHECKING:
+    from logging import Logger
+
+    from poseidon_md_core import Track
+    from poseidon_md_core.ports import SourceAcquirer
+    from pydantic import AnyUrl
 
 
 @dataclass
@@ -41,7 +43,7 @@ class PipelineStage(ABC):
     """Abstract base class for a pipeline stage."""
 
     @abstractmethod
-    def run(self, shared_storage: PipelineSharedStorage) -> Any | None:
+    def run(self, shared_storage: PipelineSharedStorage) -> None:
         """Run the pipeline stage.
 
         Args:
@@ -50,7 +52,6 @@ class PipelineStage(ABC):
         Returns:
             The result of the stage execution.
         """
-
         raise NotImplementedError("Subclasses must implement this method.")
 
 
@@ -73,12 +74,10 @@ class StageOrchestrator:
             stages: Stage types to instantiate in execution order.
             shared_storage: Existing shared storage, or `None` to create it.
         """
-
         self.stages: list[PipelineStage] = [stage() for stage in stages]
         self.storage = shared_storage or PipelineSharedStorage()
 
     def run(self) -> None:
         """Run every configured stage in order."""
-
         for stage in self.stages:
             stage.run(self.storage)
