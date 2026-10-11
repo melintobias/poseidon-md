@@ -1,6 +1,7 @@
 absl
 anydbm
 bestaudio
+BLE
 bsddb
 cls
 dl
@@ -8,11 +9,16 @@ dlp
 dlx
 docstrings
 downloaders
+DTZ
 dunder
 EDITMSG
 env
+FBT
 fmt
 fn
+FURB
+ICN
+INP
 ipynb
 isrc
 nonblank
@@ -24,6 +30,7 @@ PLR
 PLW
 preexec
 prek
+PTH
 pxd
 pyc
 pyd
@@ -31,5 +38,9 @@ pyi
 pyo
 pyz
 rgx
+RSE
+RUF
+SLF
 uvx
 WIP
+YTT
