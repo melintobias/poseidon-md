@@ -12,7 +12,6 @@ def validate_url(url: str) -> AnyUrl | None:
     Returns:
         A parsed URL for valid input, or `None` for invalid input.
     """
-
     try:
         return AnyUrl(url)
     except ValueError:

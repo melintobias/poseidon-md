@@ -1,11 +1,12 @@
 """Contracts for extracting source metadata while downloading media."""
 
 from dataclasses import dataclass
-from typing import Protocol
+from typing import Protocol, TYPE_CHECKING
 
-from ..models import MediaArtifact
-from ..models import MetadataCandidate
-from ..models import TrackSource
+if TYPE_CHECKING:
+    from poseidon_md_core.models import MediaArtifact
+    from poseidon_md_core.models import MetadataCandidate
+    from poseidon_md_core.models import TrackSource
 
 
 class SourceAcquisitionError(RuntimeError):
@@ -43,5 +44,4 @@ class SourceAcquirer(Protocol):
             SourceAcquisitionError: If extraction or download does not produce a
                 usable result.
         """
-
         ...

@@ -554,7 +554,6 @@ class Track:
         Returns:
             A new track containing the candidate with later state cleared.
         """
-
         return replace(
             self,
             metadata=TrackMetadata(extracted=candidate),

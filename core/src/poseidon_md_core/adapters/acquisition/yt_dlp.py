@@ -7,12 +7,12 @@ from typing import Any, cast
 from yt_dlp import YoutubeDL
 from yt_dlp.utils import DownloadError
 
-from ...models import MediaArtifact
-from ...models import MetadataCandidate
-from ...models import MetadataRecord
-from ...models import TrackSource
-from ...ports import SourceAcquisition
-from ...ports import SourceAcquisitionError
+from poseidon_md_core.models import MediaArtifact
+from poseidon_md_core.models import MetadataCandidate
+from poseidon_md_core.models import MetadataRecord
+from poseidon_md_core.models import TrackSource
+from poseidon_md_core.ports import SourceAcquisition
+from poseidon_md_core.ports import SourceAcquisitionError
 
 YT_DLP_PROVIDER = "yt-dlp"
 """Stable provider name recorded for values produced through yt-dlp."""
@@ -25,6 +25,14 @@ DEFAULT_OUTPUT_TEMPLATE = "%(extractor)s-%(id)s.%(ext)s"
 
 type YtDlpInfo = Mapping[str, object]
 """Resolved information dictionary returned by yt-dlp for one media item."""
+
+
+class MissingDownloadedFilepathError(ValueError):
+    """Indicate that yt-dlp returned no path for the downloaded artifact."""
+
+    def __init__(self) -> None:
+        """Initialize the error with its stable diagnostic message."""
+        super().__init__("downloaded filepath is missing")
 
 
 class YtDlpSourceAcquirer:
@@ -41,7 +49,6 @@ class YtDlpSourceAcquirer:
             download_directory: Directory passed to yt-dlp, or `None` to use
                 yt-dlp's current-working-directory behavior.
         """
-
         self.download_directory = download_directory
 
     def acquire(self, url: str) -> SourceAcquisition:
@@ -57,28 +64,24 @@ class YtDlpSourceAcquirer:
             SourceAcquisitionError: If yt-dlp fails or returns an unusable
                 result.
         """
-
         options = self._options()
         try:
             # yt-dlp accepts dynamic option dictionaries beyond its stub shape.
-            with YoutubeDL(cast(Any, options)) as downloader:
+            with YoutubeDL(cast("Any", options)) as downloader:
                 raw_info = downloader.extract_info(url, download=True)
         except (DownloadError, OSError) as error:
-            raise SourceAcquisitionError(
-                f"yt-dlp could not acquire {url}: {error}"
-            ) from error
+            msg = f"yt-dlp could not acquire {url}: {error}"
+            raise SourceAcquisitionError(msg) from error
 
         if not isinstance(raw_info, Mapping):
-            raise SourceAcquisitionError(
-                f"yt-dlp returned no single-item information for {url}"
-            )
+            msg = f"yt-dlp returned no single-item information for {url}"
+            raise SourceAcquisitionError(msg)
 
         try:
             return _source_acquisition(url, raw_info)
         except (TypeError, ValueError) as error:
-            raise SourceAcquisitionError(
-                f"yt-dlp returned incomplete information for {url}: {error}"
-            ) from error
+            msg = f"yt-dlp returned incomplete information for {url}: {error}"
+            raise SourceAcquisitionError(msg) from error
 
     # TODO: Convert to `@property`.
     def _options(self) -> dict[str, Any]:
@@ -87,7 +90,6 @@ class YtDlpSourceAcquirer:
         Returns:
             Fresh options selecting one best audio-capable media item.
         """
-
         options: dict[str, Any] = {
             # Prefer source audio without coupling to transformation.
             "format": DEFAULT_FORMAT_SELECTOR,
@@ -122,7 +124,6 @@ def _source_acquisition(url: str, info: YtDlpInfo) -> SourceAcquisition:
     Raises:
         ValueError: If required source or filepath information is absent.
     """
-
     source_id = _optional_text(info.get("id"))
     if source_id is None:
         raise ValueError("Source ID missing")
@@ -158,7 +159,6 @@ def _metadata_record(info: YtDlpInfo) -> MetadataRecord:
     Returns:
         Source metadata suitable for later validation and cleaning.
     """
-
     artists = _text_tuple(info.get("artists"))
     if not artists:
         artists = _first_text_tuple(
@@ -197,9 +197,8 @@ def _downloaded_filepath(info: YtDlpInfo) -> Path:
         Path of the downloaded media item.
 
     Raises:
-        ValueError: If yt-dlp did not report a downloaded filepath.
+        MissingDownloadedFilepathError: If yt-dlp did not report a filepath.
     """
-
     requested_downloads = info.get("requested_downloads")
     if isinstance(requested_downloads, Sequence) and not isinstance(
         requested_downloads,
@@ -215,7 +214,7 @@ def _downloaded_filepath(info: YtDlpInfo) -> Path:
 
     filepath = _first_text(info, "filepath", "_filename")
     if filepath is None:
-        raise ValueError("Downloaded filepath missing")
+        raise MissingDownloadedFilepathError
     return Path(filepath)
 
 
@@ -229,7 +228,6 @@ def _first_text(info: YtDlpInfo, *keys: str) -> str | None:
     Returns:
         First present non-blank text, or `None`.
     """
-
     for key in keys:
         value = _optional_text(info.get(key))
         if value is not None:
@@ -247,7 +245,6 @@ def _first_text_tuple(info: YtDlpInfo, *keys: str) -> tuple[str, ...]:
     Returns:
         First nonempty tuple, or an empty tuple.
     """
-
     for key in keys:
         values = _text_tuple(info.get(key))
         if values:
@@ -264,7 +261,6 @@ def _optional_text(value: object) -> str | None:
     Returns:
         Stripped non-blank text, or `None`.
     """
-
     if not isinstance(value, str):
         return None
     stripped = value.strip()
@@ -280,7 +276,6 @@ def _text_tuple(value: object) -> tuple[str, ...]:
     Returns:
         Ordered non-blank textual values.
     """
-
     if isinstance(value, str):
         text = _optional_text(value)
         return () if text is None else (text,)
@@ -300,7 +295,6 @@ def _optional_integer(value: object) -> int | None:
     Returns:
         Integer value, or `None` for another type.
     """
-
     if isinstance(value, bool) or not isinstance(value, int):
         return None
     return value
@@ -315,7 +309,6 @@ def _optional_float(value: object) -> float | None:
     Returns:
         Floating-point value, or `None` for another type.
     """
-
     if isinstance(value, bool) or not isinstance(value, int | float):
         return None
     return float(value)
