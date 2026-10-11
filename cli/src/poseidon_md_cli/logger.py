@@ -75,3 +75,24 @@ def get_logger(*, debug: bool = False) -> logging.Logger:
     DEBUG_TRACEBACK_FILTER.debug = debug
     RICH_HANDLER.rich_tracebacks = debug
     return LOGGER
+
+
+def log_stage_completion(
+    logger: logging.Logger,
+    level: int,
+    message: object,
+    *args: object,
+) -> None:
+    """Log a stage outcome and separate it from following terminal output.
+
+    The supplied logger retains control of the message level and formatting; the
+    shared Rich console then draws a horizontal rule after the log record.
+
+    Args:
+        logger: Application logger used for the completion record.
+        level: Numeric logging level chosen for the stage outcome.
+        message: Logging format string or message object.
+        *args: Values interpolated into the message using logging's formatting.
+    """
+    logger.log(level, message, *args)
+    CONSOLE.rule()

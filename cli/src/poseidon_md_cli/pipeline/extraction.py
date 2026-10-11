@@ -8,6 +8,7 @@ from poseidon_md_core.ports import SourceAcquisitionError
 from rich.progress import track
 
 from poseidon_md_cli.logger import CONSOLE
+from poseidon_md_cli.logger import log_stage_completion
 
 from .types import PipelineSharedStorage
 from .types import PipelineStage
@@ -50,7 +51,9 @@ class ExtractUrls(PipelineStage):
         if source_acquirer is None:
             if total_urls == 0:
                 shared_storage.tracks = ()
-                shared_storage.logger.info(
+                log_stage_completion(
+                    shared_storage.logger,
+                    logging.INFO,
                     "Source acquisition completed (0/0 URLs acquired)",
                 )
                 return None
@@ -125,7 +128,8 @@ class ExtractUrls(PipelineStage):
         shared_storage.tracks = tuple(acquired_tracks)
         total_failure = not acquired_tracks and total_urls > 0
         level = logging.CRITICAL if total_failure else logging.INFO
-        logger.log(
+        log_stage_completion(
+            logger,
             level,
             "Source acquisition completed (%d/%d URLs acquired)",
             len(acquired_tracks),

@@ -8,6 +8,7 @@ from rich.progress import track
 from rich.prompt import Prompt
 
 from poseidon_md_cli.logger import CONSOLE
+from poseidon_md_cli.logger import log_stage_completion
 
 from .types import PipelineSharedStorage
 from .types import PipelineStage
@@ -132,7 +133,8 @@ class ValidateUrls(PipelineStage):
         else:
             level = logging.WARNING
 
-        logger.log(
+        log_stage_completion(
+            logger,
             level,
             "URL validation completed (%d/%d unique URLs valid)",
             len(validated_urls),
