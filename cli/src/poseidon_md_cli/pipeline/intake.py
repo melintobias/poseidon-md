@@ -86,14 +86,12 @@ class ValidateUrls(PipelineStage):
 
         logger.info("URL validation started (%d URLs)", total_urls)
 
-        for index, url in enumerate(
-            track(
-                shared_storage.input_urls,
-                description="URL validation",
-                console=CONSOLE,
-            ),
-            start=1,
-        ):
+        tracked_urls = track(
+            shared_storage.input_urls,
+            description="URL validation",
+            console=CONSOLE,
+        )
+        for index, url in enumerate(tracked_urls, start=1):
             logger.debug("%d/%d Validating: %s", index, total_urls, url)
 
             if (validated_url := validate_url(url)) is None:

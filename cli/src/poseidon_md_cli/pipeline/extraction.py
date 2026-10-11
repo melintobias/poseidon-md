@@ -82,14 +82,12 @@ class ExtractUrls(PipelineStage):
         if source_acquirer is None:
             return
 
-        for index, url in enumerate(
-            track(
-                shared_storage.urls,
-                description="Source acquisition",
-                console=CONSOLE,
-            ),
-            start=1,
-        ):
+        tracked_urls = track(
+            shared_storage.urls,
+            description="Source acquisition",
+            console=CONSOLE,
+        )
+        for index, url in enumerate(tracked_urls, start=1):
             source_url = str(url)
             logger.debug(
                 "%d/%d Acquiring: %s",
