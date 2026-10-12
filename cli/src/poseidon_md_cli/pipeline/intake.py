@@ -41,10 +41,12 @@ class IntakeStage(PipelineStage):
             shared_storage.logger.info("No input URLs provided; exiting.")
             raise SystemExit(0)
 
-        StageOrchestrator([InputStage, ValidateUrls], shared_storage).run()
+        StageOrchestrator(
+            [InputSubStage, UrlValidationSubStage], shared_storage
+        ).run()
 
 
-class InputStage(PipelineStage):
+class InputSubStage(PipelineStage):
     """Prompt for input URLs if none were supplied on the command line."""
 
     @classmethod
@@ -62,7 +64,7 @@ class InputStage(PipelineStage):
         shared_storage.input_urls = urls.split()
 
 
-class ValidateUrls(PipelineStage):
+class UrlValidationSubStage(PipelineStage):
     """Validate and deduplicate supplied URLs."""
 
     @classmethod
