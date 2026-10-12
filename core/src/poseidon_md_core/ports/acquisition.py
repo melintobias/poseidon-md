@@ -1,11 +1,11 @@
 """Contracts for extracting source metadata while downloading media."""
 
-from pydantic import AnyUrl
-
 from dataclasses import dataclass
 from typing import Protocol, TYPE_CHECKING
 
 if TYPE_CHECKING:
+    from pydantic import AnyUrl
+
     from poseidon_md_core.models import MediaArtifact
     from poseidon_md_core.models import MetadataCandidate
     from poseidon_md_core.models import TrackSource
