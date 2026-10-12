@@ -92,4 +92,5 @@ def log_stage_completion(
         *args: Values interpolated into the message using logging's formatting.
     """
     logger.log(level, message, *args)
-    CONSOLE.rule()
+    if logger.level <= level:
+        CONSOLE.rule()

@@ -2,7 +2,7 @@
 
 import logging
 
-from poseidon_md_core import Track
+from poseidon_md_core.models import Track
 from poseidon_md_core.ports import SourceAcquirer
 from poseidon_md_core.ports import SourceAcquisitionError
 from rich.progress import track
@@ -26,10 +26,10 @@ class ExtractionStage(PipelineStage):
             storage: Existing pipeline storage, or `None` to create
                 empty storage for this run.
         """
-        StageOrchestrator([ExtractUrls], storage).run()
+        StageOrchestrator([UrlExtractionSubStage], storage).run()
 
 
-class ExtractUrls(PipelineStage):
+class UrlExtractionSubStage(PipelineStage):
     """Acquire validated URLs sequentially through the configured service."""
 
     @classmethod

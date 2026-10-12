@@ -11,8 +11,7 @@ from poseidon_md_cli.logger import LOGGER
 if TYPE_CHECKING:
     from logging import Logger
 
-    from poseidon_md_core import Track
-    from poseidon_md_core.ports import SourceAcquirer
+    from poseidon_md_core.models import Track
     from pydantic import AnyUrl
 
 
@@ -36,7 +35,6 @@ class PipelineSharedStorage:
     logger: Logger = field(default=LOGGER)
 
     urls: tuple[AnyUrl, ...] = field(default_factory=tuple)
-    source_acquirer: SourceAcquirer | None = None
     tracks: tuple[Track, ...] = field(default_factory=tuple)
 
 

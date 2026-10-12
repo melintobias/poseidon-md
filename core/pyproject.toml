@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "The core library for Poseidon-MD, providing shared utilities and functionality for end-to-end audio acquisition."
 readme = "README.md"
 requires-python = ">=3.14"
-dependencies = ["pydantic>=2.13.4", "yt-dlp>=2026.6.9"]
+dependencies = ["pydantic>=2.13.4"]
 
 [build-system]
 requires = ["uv_build>=0.12.1,<0.13.0"]

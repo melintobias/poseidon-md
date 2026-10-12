@@ -2,14 +2,16 @@
 
 from typing import Annotated
 
-from poseidon_md_core.adapters import YtDlpSourceAcquirer
 from typer import Argument
 from typer import Option
 from typer import Typer
 
+from poseidon_md_cli.pipeline.retrieval import RetrievalStage
+from poseidon_md_cli.pipeline.tagging import TaggingStage
+
 from .logger import get_logger
-from .pipeline import ExtractionStage
 from .pipeline import IntakeStage
+from .pipeline import MovingStage
 from .pipeline import PipelineStage
 from .pipeline.types import PipelineSharedStorage
 from .pipeline.types import StageOrchestrator
@@ -17,7 +19,12 @@ from .pipeline.types import StageOrchestrator
 app = Typer()
 """Typer application exposed by the `poseidon-md` command."""
 
-stages: list[type[PipelineStage]] = [IntakeStage, ExtractionStage]
+stages: list[type[PipelineStage]] = [
+    IntakeStage,
+    RetrievalStage,
+    TaggingStage,
+    MovingStage,
+]
 """Ordered pipeline stages run by the command-line application."""
 
 
@@ -49,7 +56,6 @@ def main(
         logger=get_logger(debug=debug),
         input_urls=urls or [],
         no_prompt=no_prompt,
-        source_acquirer=YtDlpSourceAcquirer(),
     )
     orchestrator = StageOrchestrator(stages, storage)
     orchestrator.run()
