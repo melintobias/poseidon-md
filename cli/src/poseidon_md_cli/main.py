@@ -32,10 +32,8 @@ def main(
         bool,
         Option(
             "--no-prompt",
-            help=(
-                "Exit when no URLs are provided, instead of prompting for "
-                "input."
-            ),
+            help="Exit when no URLs are provided, instead of prompting for "
+            "input.",
         ),
     ] = False,
 ) -> None:
