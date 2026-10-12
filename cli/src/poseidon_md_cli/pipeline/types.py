@@ -44,11 +44,11 @@ class PipelineStage(ABC):
     """Abstract base class for a pipeline stage."""
 
     @abstractmethod
-    def run(self, shared_storage: PipelineSharedStorage) -> None:
+    def run(self, storage: PipelineSharedStorage) -> None:
         """Run the pipeline stage.
 
         Args:
-            shared_storage: Shared storage for the pipeline stages.
+            storage: Shared storage for the pipeline stages.
 
         Returns:
             The result of the stage execution.
@@ -67,7 +67,7 @@ class StageOrchestrator:
     def __init__(
         self,
         stages: list[type[PipelineStage]],
-        shared_storage: PipelineSharedStorage | None = None,
+        storage: PipelineSharedStorage | None = None,
     ) -> None:
         """Initialize a pipeline stage sequence.
 
@@ -76,10 +76,10 @@ class StageOrchestrator:
 
         Args:
             stages: Stage classes to instantiate in execution order.
-            shared_storage: Existing shared storage, or `None` to create it.
+            storage: Existing shared storage, or `None` to create it.
         """
         self.stages = list(stages)
-        self.storage = shared_storage or PipelineSharedStorage()
+        self.storage = storage or PipelineSharedStorage()
 
     def run(self) -> None:
         """Run every configured stage in order."""

@@ -47,13 +47,13 @@ def main(
         no_prompt: Whether to exit when no URLs are provided, instead of
             prompting for input.
     """
-    shared_storage = PipelineSharedStorage(
+    storage = PipelineSharedStorage(
         logger=get_logger(debug=debug),
         input_urls=urls or [],
         no_prompt=no_prompt,
         source_acquirer=YtDlpSourceAcquirer(),
     )
-    orchestrator = StageOrchestrator(stages, shared_storage)
+    orchestrator = StageOrchestrator(stages, storage)
     orchestrator.run()
 
 

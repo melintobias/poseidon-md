@@ -22,74 +22,64 @@ class IntakeStage(PipelineStage):
     """Coordinate the URL validation work performed during intake."""
 
     @classmethod
-    def run(cls, shared_storage: PipelineSharedStorage | None = None) -> None:
+    def run(cls, storage: PipelineSharedStorage | None = None) -> None:
         """Run all URL intake steps against shared pipeline storage.
 
         Args:
-            shared_storage: Existing pipeline storage, or `None` to create
+            storage: Existing pipeline storage, or `None` to create
                 empty storage for this run.
 
         Raises:
             SystemExit: If no input URLs are provided and the `no_prompt` option
                 is set.
         """
-        if (
-            shared_storage
-            and shared_storage.no_prompt
-            and not shared_storage.input_urls
-        ):
-            shared_storage.logger.info("No input URLs provided; exiting.")
+        if storage and storage.no_prompt and not storage.input_urls:
+            storage.logger.info("No input URLs provided; exiting.")
             raise SystemExit(0)
 
-        StageOrchestrator(
-            [InputSubStage, UrlValidationSubStage], shared_storage
-        ).run()
+        StageOrchestrator([InputSubStage, UrlValidationSubStage], storage).run()
 
 
 class InputSubStage(PipelineStage):
     """Prompt for input URLs if none were supplied on the command line."""
 
     @classmethod
-    def run(cls, shared_storage: PipelineSharedStorage) -> None:
+    def run(cls, storage: PipelineSharedStorage) -> None:
         """Prompt for input URLs if none were supplied on the command line."""
-        if shared_storage.input_urls:
+        if storage.input_urls:
             return
 
         welcome()
 
-        shared_storage.logger.debug(
-            "No input URLs provided; prompting for input."
-        )
+        storage.logger.debug("No input URLs provided; prompting for input.")
         urls = Prompt.ask("Please enter URLs separated by spaces")
-        shared_storage.input_urls = urls.split()
+        storage.input_urls = urls.split()
 
 
 class UrlValidationSubStage(PipelineStage):
     """Validate and deduplicate supplied URLs."""
 
     @classmethod
-    def run(cls, shared_storage: PipelineSharedStorage) -> None:
+    def run(cls, storage: PipelineSharedStorage) -> None:
         """Store valid URLs.
 
         Args:
-            shared_storage: Pipeline storage containing the input URLs and
+            storage: Pipeline storage containing the input URLs and
                 receiving the validated URL set.
 
         Raises:
             SystemExit: If all input URLs are invalid.
         """
-        logger = shared_storage.logger
+        logger = storage.logger
 
         validated_urls: list[AnyUrl] = []
-        total_urls = len(shared_storage.input_urls)
-        total_unique_urls = len(set(shared_storage.input_urls))
+        total_urls = len(storage.input_urls)
+        total_unique_urls = len(set(storage.input_urls))
 
         logger.info("URL validation started (%d URLs)", total_urls)
 
         tracked_urls = track(
-            shared_storage.input_urls,
-            description="URL validation",
-            console=CONSOLE,
+            storage.input_urls, description="URL validation", console=CONSOLE
         )
         for index, url in enumerate(tracked_urls, start=1):
             logger.debug("%d/%d Validating: %s", index, total_urls, url)
@@ -112,7 +102,7 @@ class UrlValidationSubStage(PipelineStage):
             validated_urls.append(validated_url)
             logger.info("%d/%d Valid URL: %s", index, total_urls, validated_url)
 
-        shared_storage.urls = tuple(validated_urls)
+        storage.urls = tuple(validated_urls)
 
         total_success = len(validated_urls) == total_unique_urls
         total_failure = len(validated_urls) == 0 and total_unique_urls > 0

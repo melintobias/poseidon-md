@@ -19,14 +19,14 @@ class ExtractionStage(PipelineStage):
     """Coordinate sequential source extraction and download work."""
 
     @classmethod
-    def run(cls, shared_storage: PipelineSharedStorage | None = None) -> None:
+    def run(cls, storage: PipelineSharedStorage | None = None) -> None:
         """Run source acquisition steps against shared pipeline storage.
 
         Args:
-            shared_storage: Existing pipeline storage, or `None` to create
+            storage: Existing pipeline storage, or `None` to create
                 empty storage for this run.
         """
-        StageOrchestrator([ExtractUrls], shared_storage).run()
+        StageOrchestrator([ExtractUrls], storage).run()
 
 
 class ExtractUrls(PipelineStage):
@@ -34,7 +34,7 @@ class ExtractUrls(PipelineStage):
 
     @classmethod
     def get_source_acquirer(
-        cls, shared_storage: PipelineSharedStorage, total_urls: int
+        cls, storage: PipelineSharedStorage, total_urls: int
     ) -> SourceAcquirer | None:
         """Return configured source acquirer or handle empty-url no-op case.
 
@@ -42,12 +42,12 @@ class ExtractUrls(PipelineStage):
             RuntimeError: If URLs exist without a configured acquisition
                 service.
         """
-        source_acquirer = shared_storage.source_acquirer
+        source_acquirer = storage.source_acquirer
         if source_acquirer is None:
             if total_urls == 0:
-                shared_storage.tracks = ()
+                storage.tracks = ()
                 log_stage_completion(
-                    shared_storage.logger,
+                    storage.logger,
                     logging.INFO,
                     "Source acquisition completed (0/0 URLs acquired)",
                 )
@@ -58,11 +58,11 @@ class ExtractUrls(PipelineStage):
         return source_acquirer
 
     @classmethod
-    def run(cls, shared_storage: PipelineSharedStorage) -> None:
+    def run(cls, storage: PipelineSharedStorage) -> None:
         """Store tracks containing extracted metadata and downloaded media.
 
         Args:
-            shared_storage: Blackboard containing validated URLs, the
+            storage: Blackboard containing validated URLs, the
                 acquisition service, and the destination track collection.
 
         Raises:
@@ -70,20 +70,18 @@ class ExtractUrls(PipelineStage):
                 service.
             SystemExit: If every supplied URL fails acquisition.
         """
-        logger = shared_storage.logger
+        logger = storage.logger
 
         acquired_tracks: list[Track] = []
-        total_urls = len(shared_storage.urls)
+        total_urls = len(storage.urls)
         logger.info("Source acquisition started (%d URLs)", total_urls)
 
-        source_acquirer = cls.get_source_acquirer(shared_storage, total_urls)
+        source_acquirer = cls.get_source_acquirer(storage, total_urls)
         if source_acquirer is None:
             return
 
         tracked_urls = track(
-            shared_storage.urls,
-            description="Source acquisition",
-            console=CONSOLE,
+            storage.urls, description="Source acquisition", console=CONSOLE
         )
         for index, url in enumerate(tracked_urls, start=1):
             source_url = str(url)
@@ -115,7 +113,7 @@ class ExtractUrls(PipelineStage):
                 acquisition.artifact.location,
             )
 
-        shared_storage.tracks = tuple(acquired_tracks)
+        storage.tracks = tuple(acquired_tracks)
         total_failure = not acquired_tracks and total_urls > 0
         level = logging.CRITICAL if total_failure else logging.INFO
         log_stage_completion(
