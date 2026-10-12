@@ -84,17 +84,16 @@ class ExtractUrls(PipelineStage):
             storage.urls, description="Source acquisition", console=CONSOLE
         )
         for index, url in enumerate(tracked_urls, start=1):
-            source_url = str(url)
-            logger.debug("%d/%d Acquiring: %s", index, total_urls, source_url)
+            logger.debug("%d/%d Acquiring: %s", index, total_urls, url)
 
             try:
-                acquisition = source_acquirer.acquire(source_url)
+                acquisition = source_acquirer.acquire(url)
             except SourceAcquisitionError:
                 logger.exception(
                     "%d/%d Source acquisition failed for %s",
                     index,
                     total_urls,
-                    source_url,
+                    url,
                 )
                 continue
 

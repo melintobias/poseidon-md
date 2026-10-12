@@ -1,5 +1,7 @@
 """Contracts for extracting source metadata while downloading media."""
 
+from pydantic import AnyUrl
+
 from dataclasses import dataclass
 from typing import Protocol, TYPE_CHECKING
 
@@ -31,7 +33,7 @@ class SourceAcquisition:
 class SourceAcquirer(Protocol):
     """Extract source metadata and download media in one provider operation."""
 
-    def acquire(self, url: str) -> SourceAcquisition:
+    def acquire(self, url: AnyUrl) -> SourceAcquisition:
         """Acquire one source URL.
 
         Args:
