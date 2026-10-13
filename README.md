@@ -9,6 +9,14 @@
 An end-to-end music acquisition tool that extracts audio from online sources,
 resolves metadata, and outputs properly tagged files in MP3 format and more.
 
+The CLI converts downloaded audio to MP3. Its tagging stage reads each
+download's yt-dlp metadata JSON and writes available title, artist, album,
+composer, numbering, date, genre, and ISRC tags with Mutagen. It also embeds
+the downloaded thumbnail as front cover artwork.
+
+The final stage moves each tagged audio file to the current working directory
+without overwriting an existing file.
+
 ## Contributing
 
 For development instructions, please refer to the

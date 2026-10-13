@@ -12,7 +12,7 @@ uv sync --all-packages
 ```
 
 The `--all-packages` option installs both the CLI and core workspace members,
-including their concrete adapter dependencies.
+including their declared dependencies.
 
 ### 2. Install Node.js dependencies
 

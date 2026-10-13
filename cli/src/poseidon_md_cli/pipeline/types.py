@@ -11,8 +11,7 @@ from poseidon_md_cli.logger import LOGGER
 if TYPE_CHECKING:
     from logging import Logger
 
-    from poseidon_md_core import Track
-    from poseidon_md_core.ports import SourceAcquirer
+    from poseidon_md_core.models import Track
     from pydantic import AnyUrl
 
 
@@ -21,12 +20,11 @@ class PipelineSharedStorage:
     """Shared state and services available to every pipeline stage.
 
     Attributes:
-        input_urls: Raw URL strings supplied through the command line.
+        input_urls: Raw URL strings.
         no_prompt: Whether to exit when no URLs are provided, instead of
             prompting for input.
         logger: Application logger used to report pipeline events.
         urls: URLs accepted by the intake stage.
-        source_acquirer: Optional provider-neutral source acquisition service.
         tracks: Successfully acquired tracks available to later stages.
     """
 
@@ -36,7 +34,6 @@ class PipelineSharedStorage:
     logger: Logger = field(default=LOGGER)
 
     urls: tuple[AnyUrl, ...] = field(default_factory=tuple)
-    source_acquirer: SourceAcquirer | None = None
     tracks: tuple[Track, ...] = field(default_factory=tuple)
 
 

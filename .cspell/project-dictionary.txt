@@ -1,5 +1,7 @@
 absl
+albumartist
 anydbm
+APIC
 bestaudio
 BLE
 bsddb
@@ -7,6 +9,7 @@ cls
 dl
 dlp
 dlx
+discnumber
 docstrings
 downloaders
 DTZ
@@ -18,6 +21,7 @@ fmt
 fn
 FURB
 ICN
+infojson
 INP
 ipynb
 isrc
@@ -29,6 +33,7 @@ PLE
 PLR
 PLW
 preexec
+preferredcodec
 prek
 PTH
 pxd
@@ -37,10 +42,16 @@ pyd
 pyi
 pyo
 pyz
+postprocessors
 rgx
 RSE
 RUF
 SLF
+tracknumber
 uvx
 WIP
+writeinfojson
+writethumbnail
+ydl
+ytdlp
 YTT

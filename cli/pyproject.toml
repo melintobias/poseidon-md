@@ -4,10 +4,12 @@ version = "0.1.0"
 description = "The command-line interface for Poseidon-MD."
 requires-python = ">=3.14"
 dependencies = [
-    "poseidon-md-core",
-    "pydantic>=2.13.4",
-    "rich>=15.0.0",
-    "typer>=0.27.1",
+	"mutagen>=1.48.1",
+	"poseidon-md-core",
+	"pydantic>=2.13.4",
+	"rich>=15.0.0",
+	"typer>=0.27.1",
+	"yt-dlp>=2026.8.19",
 ]
 
 [tool.uv.sources]

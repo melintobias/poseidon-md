@@ -1,8 +1,12 @@
 """Validate, deduplicate, and report URLs entering the CLI pipeline."""
 
-import logging
-import typing
+from logging import CRITICAL
+from logging import DEBUG
+from logging import INFO
+from logging import WARNING
+from typing import TYPE_CHECKING
 
+from poseidon_md_core.models import Track
 from poseidon_md_core.pipeline.intake import validate_url
 from rich.progress import track
 from rich.prompt import Prompt
@@ -14,7 +18,7 @@ from .types import PipelineSharedStorage
 from .types import PipelineStage
 from .types import StageOrchestrator
 
-if typing.TYPE_CHECKING:
+if TYPE_CHECKING:
     from pydantic import AnyUrl
 
 
@@ -37,7 +41,10 @@ class IntakeStage(PipelineStage):
             storage.logger.info("No input URLs provided; exiting.")
             raise SystemExit(0)
 
-        StageOrchestrator([InputSubStage, UrlValidationSubStage], storage).run()
+        StageOrchestrator(
+            [InputSubStage, UrlValidationSubStage, TrackCreationSubStage],
+            storage,
+        ).run()
 
 
 class InputSubStage(PipelineStage):
@@ -108,11 +115,11 @@ class UrlValidationSubStage(PipelineStage):
         total_failure = len(validated_urls) == 0 and total_unique_urls > 0
 
         if total_success:
-            level = logging.INFO
+            level = INFO
         elif total_failure:
-            level = logging.CRITICAL
+            level = CRITICAL
         else:
-            level = logging.WARNING
+            level = WARNING
 
         log_stage_completion(
             logger,
@@ -127,6 +134,41 @@ class UrlValidationSubStage(PipelineStage):
                 "All %d unique URLs were invalid; exiting.", total_unique_urls
             )
             raise SystemExit(1)
+
+
+class TrackCreationSubStage(PipelineStage):
+    @classmethod
+    def run(cls, storage: PipelineSharedStorage) -> None:
+        """Create `Track` objects for each validated URL.
+
+        Args:
+            storage: Pipeline storage containing the validated URLs and
+                receiving the created Track objects.
+        """
+        logger = storage.logger
+
+        tracks: list[Track] = []
+        total_urls = len(storage.urls)
+
+        logger.debug("Track creation started (%d URLs)", total_urls)
+
+        for index, url in enumerate(storage.urls, start=1):
+            logger.debug("%d/%d Creating Track for: %s", index, total_urls, url)
+
+            track = Track(url=url)
+            tracks.append(track)
+
+            logger.debug("%d/%d Track created: %s", index, total_urls, track)
+
+        storage.tracks = tuple(tracks)
+
+        log_stage_completion(
+            logger,
+            DEBUG,
+            "Track creation completed (%d/%d Tracks created)",
+            len(tracks),
+            total_urls,
+        )
 
 
 def welcome() -> None:
