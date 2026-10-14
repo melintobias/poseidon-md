@@ -7,6 +7,7 @@ from dataclasses import field
 from typing import TYPE_CHECKING
 
 from poseidon_md_cli.logger import LOGGER
+from poseidon_md_cli.options import CliOptions
 
 if TYPE_CHECKING:
     from logging import Logger
@@ -20,17 +21,13 @@ class PipelineSharedStorage:
     """Shared state and services available to every pipeline stage.
 
     Attributes:
-        input_urls: Raw URL strings.
-        no_prompt: Whether to exit when no URLs are provided, instead of
-            prompting for input.
+        options: Command settings and source URLs available to stages.
         logger: Application logger used to report pipeline events.
         urls: URLs accepted by the intake stage.
         tracks: Successfully acquired tracks available to later stages.
     """
 
-    input_urls: list[str] = field(default_factory=list)
-    no_prompt: bool = field(default=False)
-
+    options: CliOptions = field(default_factory=CliOptions)
     logger: Logger = field(default=LOGGER)
 
     urls: tuple[AnyUrl, ...] = field(default_factory=tuple)

@@ -1,5 +1,6 @@
 """Validate, deduplicate, and report URLs entering the CLI pipeline."""
 
+from dataclasses import replace
 from logging import CRITICAL
 from logging import DEBUG
 from logging import INFO
@@ -26,18 +27,18 @@ class IntakeStage(PipelineStage):
     """Coordinate the URL validation work performed during intake."""
 
     @classmethod
-    def run(cls, storage: PipelineSharedStorage | None = None) -> None:
+    def run(cls, storage: PipelineSharedStorage) -> None:
         """Run all URL intake steps against shared pipeline storage.
 
         Args:
-            storage: Existing pipeline storage, or `None` to create
-                empty storage for this run.
+            storage: Existing pipeline storage for this run.
 
         Raises:
             SystemExit: If no input URLs are provided and the `no_prompt` option
                 is set.
         """
-        if storage and storage.no_prompt and not storage.input_urls:
+        options = storage.options
+        if options.no_prompt and not options.urls:
             storage.logger.info("No input URLs provided; exiting.")
             raise SystemExit(0)
 
@@ -53,14 +54,16 @@ class InputSubStage(PipelineStage):
     @classmethod
     def run(cls, storage: PipelineSharedStorage) -> None:
         """Prompt for input URLs if none were supplied on the command line."""
-        if storage.input_urls:
+        options = storage.options
+        if options.urls:
             return
 
         welcome()
 
         storage.logger.debug("No input URLs provided; prompting for input.")
         urls = Prompt.ask("Please enter URLs separated by spaces")
-        storage.input_urls = urls.split()
+
+        storage.options = replace(storage.options, urls=tuple(urls.split()))
 
 
 class UrlValidationSubStage(PipelineStage):
@@ -78,15 +81,16 @@ class UrlValidationSubStage(PipelineStage):
             SystemExit: If all input URLs are invalid.
         """
         logger = storage.logger
+        input_urls = storage.options.urls or ()
 
         validated_urls: list[AnyUrl] = []
-        total_urls = len(storage.input_urls)
-        total_unique_urls = len(set(storage.input_urls))
+        total_urls = len(input_urls)
+        total_unique_urls = len(set(input_urls))
 
         logger.info("URL validation started (%d URLs)", total_urls)
 
         tracked_urls = track(
-            storage.input_urls, description="URL validation", console=CONSOLE
+            input_urls, description="URL validation", console=CONSOLE
         )
         for index, url in enumerate(tracked_urls, start=1):
             logger.debug("%d/%d Validating: %s", index, total_urls, url)
@@ -137,6 +141,8 @@ class UrlValidationSubStage(PipelineStage):
 
 
 class TrackCreationSubStage(PipelineStage):
+    """Create track objects from URLs accepted by validation."""
+
     @classmethod
     def run(cls, storage: PipelineSharedStorage) -> None:
         """Create `Track` objects for each validated URL.
