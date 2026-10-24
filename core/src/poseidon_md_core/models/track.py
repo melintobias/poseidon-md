@@ -33,7 +33,6 @@ class TrackMetadata:
         isrc: International Standard Recording Code.
         duration_seconds: Track duration in seconds.
         artwork_url: URL of the selected artwork.
-        provenance: Provider selection details for resolved fields.
     """
 
     title: str | None = None
