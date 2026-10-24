@@ -46,6 +46,7 @@
   expressible in its annotation.
 - Keep each docstring accurate when code changes. Explain intent, units,
   invariants, side effects, ownership, and edge cases where applicable.
+- Do not edit the root `README.md` unless explicitly told to.
 
 ## Verify changes
 
