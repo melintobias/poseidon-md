@@ -82,6 +82,12 @@ ignore = [
 	"TRY003", # raise-vanilla-args
 ]
 
+[tool.ruff.lint.per-file-ignores]
+"**/tests/**" = [
+	"INP001", # implicit-namespace-package
+	"S101",   # assert
+]
+
 [tool.ruff.lint.isort]
 # Reference: https://pycqa.github.io/isort/docs/configuration/options.html#profile
 # This follows the `isort` profile for `google`.
@@ -101,4 +107,8 @@ order-by-type = false
 convention = "google"
 
 [dependency-groups]
-dev = ["prek>=0.3.13", "ruff>=0.15.12", "ty>=0.0.65"]
+dev = ["prek>=0.3.13", "pytest>=9.2.0", "ruff>=0.15.12", "ty>=0.0.65"]
+
+[tool.pytest]
+addopts = ["--import-mode=importlib"]
+testpaths = ["cli/tests", "core/tests"]

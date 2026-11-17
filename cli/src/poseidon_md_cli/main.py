@@ -12,6 +12,7 @@ from typer import Typer
 from .logger import get_logger
 from .options import CliOptions
 from .options import DEFAULT_CLI_OPTIONS
+from .options import OutputFormat
 from .pipeline import IntakeStage
 from .pipeline import MovingStage
 from .pipeline import PipelineStage
@@ -48,6 +49,9 @@ def main(
             "input.",
         ),
     ] = DEFAULT_CLI_OPTIONS.no_prompt,
+    output_format: Annotated[  # noqa: ARG001
+        OutputFormat, Option("--output-format", help="Output audio format.")
+    ] = DEFAULT_CLI_OPTIONS.output_format,
 ) -> None:
     """Process the supplied media URLs through the Poseidon pipeline.
 
@@ -57,6 +61,7 @@ def main(
         debug: Whether to include diagnostic debug records.
         no_prompt: Whether to exit when no URLs are provided, instead of
             prompting for input.
+        output_format: Audio format used for conversion and tagging.
     """
     storage = PipelineSharedStorage(
         options=CliOptions.get_context_options(ctx),

@@ -42,3 +42,12 @@ prek install --hook-type commit-msg --overwrite
 > ```sh
 > uvx prek install --hook-type commit-msg --overwrite
 > ```
+
+## Running tests
+
+Poseidon-MD uses [pytest](https://docs.pytest.org/) to test the CLI and core
+workspace members. Each member keeps its tests in its own `tests` directory.
+
+```sh
+uv run pytest
+```

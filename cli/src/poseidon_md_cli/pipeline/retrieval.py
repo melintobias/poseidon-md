@@ -19,6 +19,7 @@ if TYPE_CHECKING:
     from poseidon_md_core.models import Track
     from pydantic import AnyUrl
 
+    from poseidon_md_cli.options import OutputFormat
     from poseidon_md_cli.pipeline.types import PipelineSharedStorage
 
 
@@ -44,7 +45,9 @@ class RetrievalStage(PipelineStage):
                 "Retrieving track %d/%d: %s", index, len(tracks), track.url
             )
 
-            options = cls.get_ytdlp_options(track)
+            options = cls.get_ytdlp_options(
+                track, output_format=storage.options.output_format
+            )
             with YoutubeDL(options) as ydl:
                 download_artifact = cls.download_track(ydl, track.url)
                 track.apply_download_artifact(download_artifact)
@@ -145,8 +148,14 @@ class RetrievalStage(PipelineStage):
         return Path(filepath)
 
     @staticmethod
-    def get_ytdlp_options(track: Track) -> dict[str, object]:
-        """Build yt-dlp options for MP3 audio and per-track sidecars.
+    def get_ytdlp_options(
+        track: Track, *, output_format: OutputFormat
+    ) -> dict[str, object]:
+        """Build yt-dlp options for the requested audio format and sidecars.
+
+        Args:
+            track: Track whose temporary directory receives the outputs.
+            output_format: Audio format requested by the CLI options.
 
         Returns:
             Python API options for the requested outputs.
@@ -155,9 +164,9 @@ class RetrievalStage(PipelineStage):
             "postprocessors": [
                 {
                     "key": "FFmpegExtractAudio",  # Extract audio.
-                    "preferredcodec": "mp3",  # Convert output to MP3.
+                    "preferredcodec": output_format.value,  # Target format.
                 }
-            ],  # Extract audio as MP3.
+            ],  # Convert downloaded audio to the requested format.
             "writeinfojson": True,  # Write metadata JSON.
             "writethumbnail": True,  # Download thumbnail.
             "format": "bestaudio/best",  # Prefer audio, allow combined media.
