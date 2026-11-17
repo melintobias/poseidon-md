@@ -53,11 +53,11 @@ class RetrievalStage(PipelineStage):
                 track.apply_download_artifact(download_artifact)
 
                 logger.debug(
-                    "Downloaded media to %s, metadata to %s, "
-                    "and thumbnail to %s",
-                    download_artifact.media_path,
-                    download_artifact.metadata_path,
-                    download_artifact.thumbnail_path,
+                    "Downloaded media to %r, metadata to %r, "
+                    "and thumbnail to %r",
+                    str(download_artifact.media_path),
+                    str(download_artifact.metadata_path),
+                    str(download_artifact.thumbnail_path),
                 )
 
         log_stage_completion(logger, logging.INFO, "Track retrieval completed")

@@ -48,11 +48,11 @@ class MovingStage(PipelineStage):
             shutil.move(source, destination)
             track.artifacts.tmp_media_path = None
             storage.logger.info(
-                'Moved track %s/%s to "%s": %s',
+                "Moved track %s/%s to %r: %s",
                 index,
                 len(tracks),
-                destination,
+                str(destination),
                 track.url,
-            )  # TODO: Encapsulate track path dynamically; replace double quotes
+            )
 
         log_stage_completion(logger, logging.INFO, "Track moving completed.")
