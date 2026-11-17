@@ -76,7 +76,7 @@ class TrackArtifacts:
 
 @dataclass(slots=True, kw_only=True)
 class Track:
-    """Immutable track aggregate passed between media pipeline modules.
+    """Track aggregate passed between media pipeline modules.
 
     Attributes:
         url: Track URL and provider identity.
