@@ -16,6 +16,13 @@ For valid metadata, it applies tags and artwork with the selected writer and
 stores the metadata on the track after the write succeeds. `MovingStage` then
 moves the media file into the output directory and clears its temporary path.
 
+The CLI's `--thumbnail-format` option chooses the image encoding for the
+embedded front cover. It accepts `original` (the default), `jpg`, `png`, and
+`webp`. For example, `uv run poseidon-md --thumbnail-format jpg "<source-url>"`
+uses yt-dlp and FFmpeg to convert the downloaded thumbnail to JPEG before
+tagging. The option only controls the image encoding. Spotify Local Files
+may also need smaller artwork.
+
 The CLI's `--output-dir` (`-o`) option chooses the output directory. Without
 it, the CLI uses the platform's music directory: `~/Music` on Windows and
 macOS, and `$XDG_MUSIC_DIR` or `~/Music` on Linux and other POSIX platforms.

@@ -24,6 +24,22 @@ class OutputFormat(StrEnum):
     """MPEG Layer III audio with ID3 metadata."""
 
 
+class ThumbnailFormat(StrEnum):
+    """Image formats for the thumbnail embedded as cover artwork."""
+
+    ORIGINAL = "original"
+    """Keep the downloaded image without conversion."""
+
+    JPG = "jpg"
+    """Use JPEG for the cover image."""
+
+    PNG = "png"
+    """Use PNG for the cover image."""
+
+    WEBP = "webp"
+    """Use WebP for the cover image."""
+
+
 @dataclass(frozen=True, slots=True, kw_only=True)
 class CliOptions:
     """Command settings available to pipeline stages.
@@ -33,6 +49,7 @@ class CliOptions:
         debug: Whether diagnostic logging is enabled.
         no_prompt: Whether to exit when no URLs were supplied.
         output_format: Audio format produced by retrieval and used for tagging.
+        thumbnail_format: Image format to use for the embedded cover artwork.
         output_dir: Directory chosen to receive finished audio files, or `None`
             to use the platform's music directory. The path may not exist;
             intake then falls back to the working directory.
@@ -43,23 +60,29 @@ class CliOptions:
     debug: bool = False
     no_prompt: bool = False
     output_format: OutputFormat = OutputFormat.MP3
+    thumbnail_format: ThumbnailFormat = ThumbnailFormat.ORIGINAL
     output_dir: Path | None = None
 
     def __post_init__(self) -> None:
-        """Convert the raw output format and directory from Typer to models.
+        """Convert the raw formats and directory from Typer to models.
 
         Typer keeps raw values in `Context.params`, so options built from the
-        context receive the format's value instead of a member and the output
+        context receive format values instead of enum members and the output
         directory as a string instead of a path.
 
         Raises:
-            ValueError: If the output format is unsupported.
+            ValueError: If the audio or thumbnail format is unsupported.
         """
         object.__setattr__(
             self, "output_format", OutputFormat(self.output_format)
         )
+
         if self.output_dir is not None:
             object.__setattr__(self, "output_dir", Path(self.output_dir))
+
+        object.__setattr__(
+            self, "thumbnail_format", ThumbnailFormat(self.thumbnail_format)
+        )
 
     @staticmethod
     def get_context_options(ctx: Context) -> CliOptions:

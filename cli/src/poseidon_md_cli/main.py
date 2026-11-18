@@ -15,6 +15,7 @@ from .options import CliOptions
 from .options import DEFAULT_CLI_OPTIONS
 from .options import OUTPUT_DIR_OPTION
 from .options import OutputFormat
+from .options import ThumbnailFormat
 from .pipeline import IntakeStage
 from .pipeline import MovingStage
 from .pipeline import PipelineStage
@@ -54,6 +55,12 @@ def main(  # noqa: PLR0913 # Typer maps each option to a parameter.
     output_format: Annotated[  # noqa: ARG001
         OutputFormat, Option("--output-format", help="Output audio format.")
     ] = DEFAULT_CLI_OPTIONS.output_format,
+    thumbnail_format: Annotated[  # noqa: ARG001
+        ThumbnailFormat,
+        Option(
+            "--thumbnail-format", help="Image format for embedded cover art."
+        ),
+    ] = DEFAULT_CLI_OPTIONS.thumbnail_format,
     output_dir: Annotated[  # noqa: ARG001
         Path | None,
         Option(
@@ -74,6 +81,7 @@ def main(  # noqa: PLR0913 # Typer maps each option to a parameter.
         no_prompt: Whether to exit when no URLs are provided, instead of
             prompting for input.
         output_format: Audio format used for conversion and tagging.
+        thumbnail_format: Image format to use for the embedded cover artwork.
         output_dir: Directory receiving finished audio files, or `None` to
             use the platform's music directory.
     """

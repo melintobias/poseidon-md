@@ -13,7 +13,7 @@ class DownloadArtifact:
 
     Attributes:
         metadata_path: Path to the downloaded metadata JSON file.
-        thumbnail_path: Path to the first downloaded thumbnail image file.
+        thumbnail_path: Path to the thumbnail after any image conversion.
         media_path: Path to the final downloaded media file.
     """
 

@@ -105,7 +105,7 @@ class TrackArtifacts:
         tmp_directory: Temporary directory for downloaded media.
         tmp_media_path: Path to the final downloaded media file.
         tmp_metadata_path: Path to the downloaded metadata JSON file.
-        tmp_thumbnail_path: Path to the first downloaded thumbnail image file.
+        tmp_thumbnail_path: Path to the thumbnail ready for tagging.
     """
 
     tmp_directory: Path | None = None

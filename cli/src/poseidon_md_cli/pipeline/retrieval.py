@@ -13,6 +13,7 @@ from yt_dlp import YoutubeDL
 from poseidon_md_cli.logger import CONSOLE
 from poseidon_md_cli.logger import log_stage_completion
 from poseidon_md_cli.models.yt_dlp import DownloadArtifact
+from poseidon_md_cli.options import ThumbnailFormat
 from poseidon_md_cli.pipeline.types import PipelineStage
 
 if TYPE_CHECKING:
@@ -45,9 +46,7 @@ class RetrievalStage(PipelineStage):
                 "Retrieving track %d/%d: %s", index, len(tracks), track.url
             )
 
-            options = cls.get_ytdlp_options(
-                track, output_format=storage.options.output_format
-            )
+            options = cls.get_ytdlp_options(storage, track)
             with YoutubeDL(options) as ydl:
                 download_artifact = cls.download_track(ydl, track.url)
                 track.apply_download_artifact(download_artifact)
@@ -104,7 +103,7 @@ class RetrievalStage(PipelineStage):
 
     @staticmethod
     def get_thumbnail_path(ydl: YoutubeDL, info: Mapping[str, object]) -> Path:
-        """Return the downloaded thumbnail path, resolving yt-dlp's file move.
+        """Return the thumbnail path after yt-dlp conversion and file moves.
 
         Args:
             ydl: Configured downloader, used to resolve a moved thumbnail.
@@ -149,24 +148,41 @@ class RetrievalStage(PipelineStage):
 
     @staticmethod
     def get_ytdlp_options(
-        track: Track, *, output_format: OutputFormat
+        storage: PipelineSharedStorage, track: Track
     ) -> dict[str, object]:
         """Build yt-dlp options for the requested audio format and sidecars.
 
         Args:
+            storage: Shared pipeline storage containing the requested formats
+                and logger.
             track: Track whose temporary directory receives the outputs.
-            output_format: Audio format requested by the CLI options.
 
         Returns:
             Python API options for the requested outputs.
         """
+        logger = storage.logger
+        output_format = storage.options.output_format
+        thumbnail_format = storage.options.thumbnail_format
+
+        post_processors = [
+            {
+                "key": "FFmpegExtractAudio",
+                "preferredcodec": output_format.value,  # Target audio format.
+            }
+        ]
+
+        if thumbnail_format is not ThumbnailFormat.ORIGINAL:
+            logger.debug(
+                "Converting thumbnail to format %r", thumbnail_format.value
+            )
+            post_processors.append({
+                "key": "FFmpegThumbnailsConvertor",
+                "format": thumbnail_format.value,
+                "when": "before_dl",  # Thumbnail is already downloaded.
+            })
+
         return {
-            "postprocessors": [
-                {
-                    "key": "FFmpegExtractAudio",  # Extract audio.
-                    "preferredcodec": output_format.value,  # Target format.
-                }
-            ],  # Convert downloaded audio to the requested format.
+            "postprocessors": post_processors,  # Convert the audio and artwork.
             "writeinfojson": True,  # Write metadata JSON.
             "writethumbnail": True,  # Download thumbnail.
             "format": "bestaudio/best",  # Prefer audio, allow combined media.
