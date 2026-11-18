@@ -1,7 +1,6 @@
-"""Move tagged audio files to the current working directory."""
+"""Move tagged audio files to the pipeline's output directory."""
 
 import logging
-from pathlib import Path
 import shutil
 from typing import TYPE_CHECKING
 
@@ -16,14 +15,15 @@ if TYPE_CHECKING:
 
 
 class MovingStage(PipelineStage):
-    """Publish each tagged audio file in the current working directory."""
+    """Publish each tagged audio file in the output directory."""
 
     @classmethod
     def run(cls, storage: PipelineSharedStorage) -> None:
-        """Move every tagged track's audio file to the working directory.
+        """Move every tagged track's audio file to the output directory.
 
         Args:
-            storage: Pipeline storage containing the tagged tracks.
+            storage: Pipeline storage containing the tagged tracks and the
+                output directory receiving their audio files.
 
         Raises:
             ValueError: If the track has no downloaded audio file.
@@ -41,7 +41,7 @@ class MovingStage(PipelineStage):
                 msg = f"Track has no downloaded audio file: {track.url}"
                 raise ValueError(msg)
 
-            destination = Path.cwd() / source.name
+            destination = storage.output_directory / source.name
             if destination.exists() or destination.is_symlink():
                 raise FileExistsError(destination)
 

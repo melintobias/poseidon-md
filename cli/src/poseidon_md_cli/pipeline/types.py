@@ -4,6 +4,7 @@ from abc import ABC
 from abc import abstractmethod
 from dataclasses import dataclass
 from dataclasses import field
+from pathlib import Path
 from typing import TYPE_CHECKING
 
 from poseidon_md_cli.logger import LOGGER
@@ -25,6 +26,8 @@ class PipelineSharedStorage:
         logger: Application logger used to report pipeline events.
         urls: URLs accepted by the intake stage.
         tracks: Successfully acquired tracks available to later stages.
+        output_directory: Existing directory that receives finished audio
+            files. Defaults to the working directory at storage creation.
     """
 
     options: CliOptions = field(default_factory=CliOptions)
@@ -32,6 +35,7 @@ class PipelineSharedStorage:
 
     urls: tuple[AnyUrl, ...] = field(default_factory=tuple)
     tracks: tuple[Track, ...] = field(default_factory=tuple)
+    output_directory: Path = field(default_factory=Path.cwd)
 
 
 class PipelineStage(ABC):
