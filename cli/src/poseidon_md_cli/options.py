@@ -1,12 +1,20 @@
-"""CLI option dataclass."""
+"""CLI option definitions shared by the command and pipeline stages."""
 
 from dataclasses import dataclass
 from dataclasses import fields
 from enum import StrEnum
+from pathlib import Path
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from typer import Context
+
+OUTPUT_DIR_OPTION = "--output-dir"
+"""Long flag choosing the directory that receives finished audio files.
+
+Warnings about a missing output directory name this flag, so it is shared with
+the command definition to keep both in sync.
+"""
 
 
 class OutputFormat(StrEnum):
@@ -25,6 +33,9 @@ class CliOptions:
         debug: Whether diagnostic logging is enabled.
         no_prompt: Whether to exit when no URLs were supplied.
         output_format: Audio format produced by retrieval and used for tagging.
+        output_dir: Directory chosen to receive finished audio files, or `None`
+            to use the platform's music directory. The path may not exist;
+            intake then falls back to the working directory.
     """
 
     urls: list[str] | None = None
@@ -32,12 +43,14 @@ class CliOptions:
     debug: bool = False
     no_prompt: bool = False
     output_format: OutputFormat = OutputFormat.MP3
+    output_dir: Path | None = None
 
     def __post_init__(self) -> None:
-        """Store the output format as an enum member.
+        """Convert the raw output format and directory from Typer to models.
 
-        Typer keeps the raw choice string in `Context.params`, so options
-        built from the context receive the format's value instead of a member.
+        Typer keeps raw values in `Context.params`, so options built from the
+        context receive the format's value instead of a member and the output
+        directory as a string instead of a path.
 
         Raises:
             ValueError: If the output format is unsupported.
@@ -45,6 +58,8 @@ class CliOptions:
         object.__setattr__(
             self, "output_format", OutputFormat(self.output_format)
         )
+        if self.output_dir is not None:
+            object.__setattr__(self, "output_dir", Path(self.output_dir))
 
     @staticmethod
     def get_context_options(ctx: Context) -> CliOptions:

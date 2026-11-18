@@ -1,10 +1,11 @@
-"""Validate, deduplicate, and report URLs entering the CLI pipeline."""
+"""Validate the URLs and output directory entering the CLI pipeline."""
 
 from dataclasses import replace
 from logging import CRITICAL
 from logging import DEBUG
 from logging import INFO
 from logging import WARNING
+from pathlib import Path
 from typing import TYPE_CHECKING
 
 from poseidon_md_core.models import Track
@@ -12,8 +13,10 @@ from poseidon_md_core.pipeline.intake import validate_url
 from rich.progress import track
 from rich.prompt import Prompt
 
+from poseidon_md_cli.directories import get_music_directory
 from poseidon_md_cli.logger import CONSOLE
 from poseidon_md_cli.logger import log_stage_completion
+from poseidon_md_cli.options import OUTPUT_DIR_OPTION
 
 from .types import PipelineSharedStorage
 from .types import PipelineStage
@@ -22,13 +25,31 @@ from .types import StageOrchestrator
 if TYPE_CHECKING:
     from pydantic import AnyUrl
 
+_MISSING_OUTPUT_DIRECTORY = (
+    "Output directory %r does not exist; saving tracks to the current "
+    "directory %r instead. Pass an existing directory with %s."
+)
+"""Warning for a missing directory chosen on the command line.
+
+Formatted with the chosen directory, the working directory, and the option.
+"""
+
+_MISSING_MUSIC_DIRECTORY = (
+    "Music directory %r was not found; saving tracks to the current "
+    "directory %r instead. Choose a directory with %s."
+)
+"""Warning for a missing default music directory.
+
+Formatted with the music directory, the working directory, and the option.
+"""
+
 
 class IntakeStage(PipelineStage):
-    """Coordinate the URL validation work performed during intake."""
+    """Coordinate the URL and output directory checks performed at intake."""
 
     @classmethod
     def run(cls, storage: PipelineSharedStorage) -> None:
-        """Run all URL intake steps against shared pipeline storage.
+        """Run all intake steps against shared pipeline storage.
 
         Args:
             storage: Existing pipeline storage for this run.
@@ -43,7 +64,12 @@ class IntakeStage(PipelineStage):
             raise SystemExit(0)
 
         StageOrchestrator(
-            [InputSubStage, UrlValidationSubStage, TrackCreationSubStage],
+            [
+                InputSubStage,
+                UrlValidationSubStage,
+                TrackCreationSubStage,
+                OutputDirectorySubStage,
+            ],
             storage,
         ).run()
 
@@ -174,6 +200,48 @@ class TrackCreationSubStage(PipelineStage):
             "Track creation completed (%d/%d Tracks created)",
             len(tracks),
             total_urls,
+        )
+
+
+class OutputDirectorySubStage(PipelineStage):
+    """Choose the existing directory that receives finished audio files."""
+
+    @classmethod
+    def run(cls, storage: PipelineSharedStorage) -> None:
+        """Store the chosen or default output directory, or the fallback.
+
+        A directory chosen with the output directory option takes precedence
+        over the platform's music directory. If the selected directory doesn't
+        exist, a warning specific to its source names it and the option, and
+        the current working directory is used instead.
+
+        Args:
+            storage: Pipeline storage containing the command options and
+                receiving the output directory.
+        """
+        logger = storage.logger
+
+        if storage.options.output_dir is not None:
+            directory = storage.options.output_dir
+            missing_warning = _MISSING_OUTPUT_DIRECTORY
+        else:
+            directory = get_music_directory()
+            missing_warning = _MISSING_MUSIC_DIRECTORY
+
+        if not directory.is_dir():
+            fallback = Path.cwd()
+            logger.warning(
+                missing_warning,
+                str(directory),
+                str(fallback),
+                OUTPUT_DIR_OPTION,
+            )
+            directory = fallback
+
+        storage.output_directory = directory
+
+        log_stage_completion(
+            logger, DEBUG, "Output directory selected: %r", str(directory)
         )
 
 
