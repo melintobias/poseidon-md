@@ -1,22 +1,29 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="13 4 429 118" role="img">
 	<title>Posidon</title>
+	<!-- Compass rose centered where the shaft meets the tines -->
+	<circle cx="64" cy="70" r="25.6" fill="none" stroke="#E0F2FE" stroke-width="2.4" />
+	<path fill="#E0F2FE" d="M64 34.8L68.8 70L64 76.4L59.2 70zM78.71 55.29L66.55 72.55L59.47 74.53L61.45 67.45zM99.2 70L64 74.8L57.6 70L64 65.2zM78.71 84.71L61.45 72.55L59.47 65.47L66.55 67.45zM64 105.2L59.2 70L64 63.6L68.8 70zM49.29 84.71L61.45 67.45L68.53 65.47L66.55 72.55zM28.8 70L64 65.2L70.4 70L64 74.8zM49.29 55.29L66.55 67.45L68.53 74.53L61.45 72.55z" />
+	<!-- Trident and wave -->
 	<g fill="none" stroke-linecap="round" stroke-width="10">
-		<path stroke="#0B2A4A" d="M36 41v7c0 14 12 22 28 22s28-8 28-22v-7M64 33v59" />
-		<path stroke="#38BDF8" d="M20 110q11-10 22 0t22 0 22 0 22 0" />
+		<path stroke="#0B2A4A" d="M36 41v7c0 14 12 22 28 22s28-8 28-22v-7M64 33v64" />
+		<path stroke="#38BDF8" d="M20 115c8 0 14-10 22-10s14 10 22 10 14-10 22-10 14 10 22 10" />
 	</g>
 	<path fill="#0B2A4A" d="M36 16l5 20v6H31v-6zM64 6l5 22v6H59v-6zM92 16l5 20v6H87v-6z" />
+	<!-- Wordmark, with a water droplet over the i and an anchor below it -->
 	<g transform="translate(136 22) scale(0.84)">
 		<g fill="none" stroke="#0B2A4A" stroke-linecap="round" stroke-linejoin="round" stroke-width="10">
 			<path d="M5 35v63" />
 			<circle cx="24" cy="54" r="19" />
 			<circle cx="84" cy="54" r="19" />
 			<path d="M151.3 39.05A15 9.5 0 1 0 139 54a15 9.5 0 1 1-12.3 14.95" />
-			<path d="M176 35v38" />
+			<path d="M176 35v63" />
 			<circle cx="217" cy="54" r="19" />
 			<path d="M236 5v68" />
 			<circle cx="277" cy="54" r="19" />
 			<path d="M318 35v38m0-19a19 19 0 0 1 38 0v19" />
 		</g>
-		<path fill="#38BDF8" d="M176 7.144l8 13.856h-16z" />
+		<path fill="#0B2A4A" d="M152 84c0 11 10 19 24 19s24-8 24-19h-7c0 6-7 9-17 9s-17-3-17-9z" />
+		<path fill="#0B2A4A" d="M155.5 79l8 9h-16zM196.5 79l8 9h-16z" />
+		<path fill="#38BDF8" d="M176 0c3 4.5 7.5 9.5 7.5 14.5a7.5 7.5 0 0 1-15 0c0-5 4.5-10 7.5-14.5z" />
 	</g>
 </svg>
