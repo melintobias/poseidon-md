@@ -70,7 +70,7 @@ class Mp3TagWriter:
             encoding=id3.Encoding.UTF8,
             mime=mime_type,
             type=id3.PictureType.COVER_FRONT,
-            desc="",
+            desc="",  # TODO: Weigh desc options
             data=artwork_path.read_bytes(),
         )
         try:
@@ -81,23 +81,23 @@ class Mp3TagWriter:
 
         tags = audio.tags if audio.tags is not None else id3.ID3()
         text_frames = {
-            # Write the track title.
+            # track title
             id3.TIT2: metadata.title,
-            # Keep the ordered artist credits.
+            # artists (ordered!)
             id3.TPE1: list(metadata.artists),
-            # Write the release name.
+            # media title, NOT necessarily album
             id3.TALB: metadata.album,
-            # Write the album-level artist credit.
+            # album artist(s)
             id3.TPE2: metadata.album_artist,
-            # Preserve the ordered composer credits.
+            # composers (ordered!)
             id3.TCOM: list(metadata.composers),
-            # Store the track position and total count on its disc.
+            # track number + total number of tracks in the release
             id3.TRCK: _number_pair(metadata.track_number, metadata.track_total),
-            # Store the disc position and total count in its release.
+            # disc number + total number of disks in the release
             id3.TPOS: _number_pair(metadata.disc_number, metadata.disc_total),
-            # Write the full or partial release date.
+            # full or partial release date
             id3.TDRC: metadata.release_date,
-            # Preserve ordered genre labels.
+            # genres (ordered!)
             id3.TCON: list(metadata.genres),
         }
         for frame, value in text_frames.items():
