@@ -41,15 +41,19 @@ class PipelineSharedStorage:
 class PipelineStage(ABC):
     """Abstract base class for a pipeline stage."""
 
+    @classmethod
     @abstractmethod
-    def run(self, storage: PipelineSharedStorage) -> None:
+    def run(cls, storage: PipelineSharedStorage) -> None:
         """Run the pipeline stage.
+
+        Stages keep no per-instance state, since everything they share lives
+        in `storage`, so subclasses implement this as a class method.
 
         Args:
             storage: Shared storage for the pipeline stages.
 
-        Returns:
-            The result of the stage execution.
+        Raises:
+            NotImplementedError: Always; subclasses must override this method.
         """
         raise NotImplementedError("Subclasses must implement this method.")
 
