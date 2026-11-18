@@ -2,37 +2,37 @@
 
 from rich.theme import Theme
 
-TITLE = "poseidon.title"
+TITLE = "posidon.title"
 """Theme style name for prominent titles and branded highlights."""
 
-BORDER = "poseidon.border"
+BORDER = "posidon.border"
 """Theme style name for borders around tables and panels."""
 
-HEADING = "poseidon.heading"
+HEADING = "posidon.heading"
 """Theme style name for headings inside structured output."""
 
-EMPHASIS = "poseidon.emphasis"
+EMPHASIS = "posidon.emphasis"
 """Theme style name for text requiring neutral emphasis."""
 
-SUCCESS = "poseidon.success"
+SUCCESS = "posidon.success"
 """Theme style name for successful outcomes."""
 
-SUCCESS_DETAIL = "poseidon.success.detail"
+SUCCESS_DETAIL = "posidon.success.detail"
 """Theme style name for secondary successful-outcome details."""
 
-WARNING = "poseidon.warning"
+WARNING = "posidon.warning"
 """Theme style name for warnings and non-fatal exceptional outcomes."""
 
-WARNING_DETAIL = "poseidon.warning.detail"
+WARNING_DETAIL = "posidon.warning.detail"
 """Theme style name for secondary warning details."""
 
-ERROR = "poseidon.error"
+ERROR = "posidon.error"
 """Theme style name for failed or rejected outcomes."""
 
-ERROR_TEXT = "poseidon.error.text"
+ERROR_TEXT = "posidon.error.text"
 """Theme style name for content associated with an error."""
 
-ERROR_DETAIL = "poseidon.error.detail"
+ERROR_DETAIL = "posidon.error.detail"
 """Theme style name for secondary error details."""
 
 THEME = Theme({
@@ -59,4 +59,4 @@ THEME = Theme({
     # ERROR_DETAIL de-emphasizes supporting error information.
     ERROR_DETAIL: "red",
 })
-"""Shared semantic theme for all Poseidon-MD terminal output."""
+"""Shared semantic theme for all Posidon terminal output."""

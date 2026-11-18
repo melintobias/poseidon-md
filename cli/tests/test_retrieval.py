@@ -7,11 +7,11 @@ import shutil
 import subprocess  # noqa: S404
 from typing import TYPE_CHECKING
 
-from poseidon_md_cli.options import CliOptions
-from poseidon_md_cli.options import ThumbnailFormat
-from poseidon_md_cli.pipeline.retrieval import RetrievalStage
-from poseidon_md_cli.pipeline.types import PipelineSharedStorage
-from poseidon_md_core.models import Track
+from posidon_cli.options import CliOptions
+from posidon_cli.options import ThumbnailFormat
+from posidon_cli.pipeline.retrieval import RetrievalStage
+from posidon_cli.pipeline.types import PipelineSharedStorage
+from posidon_core.models import Track
 from pydantic import AnyUrl
 import pytest
 from yt_dlp import YoutubeDL

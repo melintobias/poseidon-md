@@ -12,7 +12,7 @@ from pydantic import TypeAdapter
 if TYPE_CHECKING:
     from collections.abc import Mapping
 
-    from poseidon_md_cli.models.yt_dlp import DownloadArtifact
+    from posidon_cli.models.yt_dlp import DownloadArtifact
     from pydantic import AnyUrl
 
 _METADATA_FILE_ADAPTER = TypeAdapter(dict[str, JsonValue])
@@ -150,7 +150,7 @@ class Track:
             Path to the created temporary directory.
         """
         self.artifacts.tmp_directory = Path(
-            mkdtemp(prefix="poseidon_md_", dir=base_directory)
+            mkdtemp(prefix="posidon_", dir=base_directory)
         )
         return self.artifacts.tmp_directory
 

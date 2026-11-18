@@ -7,13 +7,13 @@ from dataclasses import field
 from pathlib import Path
 from typing import TYPE_CHECKING
 
-from poseidon_md_cli.logger import LOGGER
-from poseidon_md_cli.options import CliOptions
+from posidon_cli.logger import LOGGER
+from posidon_cli.options import CliOptions
 
 if TYPE_CHECKING:
     from logging import Logger
 
-    from poseidon_md_core.models import Track
+    from posidon_core.models import Track
     from pydantic import AnyUrl
 
 

@@ -2,7 +2,7 @@
 
 from typing import TYPE_CHECKING
 
-from poseidon_md_cli.directories import get_music_directory
+from posidon_cli.directories import get_music_directory
 import pytest
 
 if TYPE_CHECKING:

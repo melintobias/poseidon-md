@@ -10,18 +10,17 @@ from typing import cast, TYPE_CHECKING
 from rich import progress
 from yt_dlp import YoutubeDL
 
-from poseidon_md_cli.logger import CONSOLE
-from poseidon_md_cli.logger import log_stage_completion
-from poseidon_md_cli.models.yt_dlp import DownloadArtifact
-from poseidon_md_cli.options import ThumbnailFormat
-from poseidon_md_cli.pipeline.types import PipelineStage
+from posidon_cli.logger import CONSOLE
+from posidon_cli.logger import log_stage_completion
+from posidon_cli.models.yt_dlp import DownloadArtifact
+from posidon_cli.options import ThumbnailFormat
+from posidon_cli.pipeline.types import PipelineStage
 
 if TYPE_CHECKING:
-    from poseidon_md_core.models import Track
+    from posidon_core.models import Track
     from pydantic import AnyUrl
 
-    from poseidon_md_cli.options import OutputFormat
-    from poseidon_md_cli.pipeline.types import PipelineSharedStorage
+    from posidon_cli.pipeline.types import PipelineSharedStorage
 
 
 class RetrievalStage(PipelineStage):

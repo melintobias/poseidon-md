@@ -5,7 +5,7 @@ from typing import Protocol, TYPE_CHECKING
 if TYPE_CHECKING:
     from pathlib import Path
 
-    from poseidon_md_core.models import TrackMetadata
+    from posidon_core.models import TrackMetadata
 
 
 class TagWriter(Protocol):

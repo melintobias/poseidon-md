@@ -38,6 +38,7 @@ pkl
 PLE
 PLR
 PLW
+posidon
 postprocessors
 preexec
 preferredcodec

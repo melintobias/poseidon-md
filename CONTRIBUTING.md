@@ -9,7 +9,7 @@ package architecture.
 
 ### 1. Install Python dependencies
 
-Poseidon-MD uses [uv](https://docs.astral.sh/uv/) for Python environment and
+Posidon uses [uv](https://docs.astral.sh/uv/) for Python environment and
 dependency management.
 
 ```sh
@@ -21,7 +21,7 @@ including their declared dependencies.
 
 ### 2. Install Node.js dependencies
 
-Poseidon-MD uses [pnpm](https://pnpm.io/) for Node.js-based development tools,
+Posidon uses [pnpm](https://pnpm.io/) for Node.js-based development tools,
 including Prettier.
 
 ```sh
@@ -30,7 +30,7 @@ pnpm install --frozen-lockfile
 
 ### 3. Install pre-commit hooks
 
-Poseidon-MD uses [prek](https://prek.j178.dev/) alongside
+Posidon uses [prek](https://prek.j178.dev/) alongside
 [Ruff](https://github.com/astral-sh/ruff),
 [Pyright](https://github.com/microsoft/pyright), and
 [git-conventional-commits](https://github.com/qoomon/git-conventional-commits),
@@ -50,7 +50,7 @@ prek install --hook-type commit-msg --overwrite
 
 ## Running tests
 
-Poseidon-MD uses [pytest](https://docs.pytest.org/) to test the CLI and core
+Posidon uses [pytest](https://docs.pytest.org/) to test the CLI and core
 workspace members. Each member keeps its tests in its own `tests` directory.
 
 ```sh

@@ -6,13 +6,13 @@ from typing import TYPE_CHECKING
 
 from mutagen.id3 import ID3
 from mutagen.mp3 import EasyMP3
-from poseidon_md_cli.models.yt_dlp import DownloadArtifact
-from poseidon_md_cli.options import OutputFormat
-from poseidon_md_cli.pipeline.tagging import _TAG_WRITERS  # noqa: PLC2701
-from poseidon_md_cli.pipeline.tagging import TaggingStage
-from poseidon_md_cli.pipeline.types import PipelineSharedStorage
-from poseidon_md_core.models import Track
-from poseidon_md_core.models import TrackMetadata
+from posidon_cli.models.yt_dlp import DownloadArtifact
+from posidon_cli.options import OutputFormat
+from posidon_cli.pipeline.tagging import _TAG_WRITERS  # noqa: PLC2701
+from posidon_cli.pipeline.tagging import TaggingStage
+from posidon_cli.pipeline.types import PipelineSharedStorage
+from posidon_core.models import Track
+from posidon_core.models import TrackMetadata
 from pydantic import AnyUrl
 import pytest
 

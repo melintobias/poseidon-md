@@ -11,7 +11,7 @@ if TYPE_CHECKING:
     from logging import Logger
     from pathlib import Path
 
-    from poseidon_md_core.models import TrackMetadata
+    from posidon_core.models import TrackMetadata
 
 
 def _number_pair(number: int | None, total: int | None) -> str | None:

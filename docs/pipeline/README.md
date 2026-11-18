@@ -18,7 +18,7 @@ moves the media file into the output directory and clears its temporary path.
 
 The CLI's `--thumbnail-format` option chooses the image encoding for the
 embedded front cover. It accepts `original` (the default), `jpg`, `png`, and
-`webp`. For example, `uv run poseidon-md --thumbnail-format jpg "<source-url>"`
+`webp`. For example, `uv run posidon --thumbnail-format jpg "<source-url>"`
 uses yt-dlp and FFmpeg to convert the downloaded thumbnail to JPEG before
 tagging. The option only controls the image encoding. Spotify Local Files
 may also need smaller artwork.

@@ -5,23 +5,23 @@ from __future__ import annotations
 import logging
 from typing import TYPE_CHECKING
 
-from poseidon_md_core.adapters.tagging.mp3 import Mp3TagWriter
-from poseidon_md_core.models import TrackMetadata
+from posidon_core.adapters.tagging.mp3 import Mp3TagWriter
+from posidon_core.models import TrackMetadata
 from pydantic import ValidationError
 from rich import progress
 
-from poseidon_md_cli.logger import CONSOLE
-from poseidon_md_cli.logger import log_stage_completion
-from poseidon_md_cli.options import OutputFormat
-from poseidon_md_cli.pipeline.types import PipelineStage
+from posidon_cli.logger import CONSOLE
+from posidon_cli.logger import log_stage_completion
+from posidon_cli.options import OutputFormat
+from posidon_cli.pipeline.types import PipelineStage
 
 if TYPE_CHECKING:
     from collections.abc import Callable
 
-    from poseidon_md_core.models import Track
-    from poseidon_md_core.ports import TagWriter
+    from posidon_core.models import Track
+    from posidon_core.ports import TagWriter
 
-    from poseidon_md_cli.pipeline.types import PipelineSharedStorage
+    from posidon_cli.pipeline.types import PipelineSharedStorage
 
 
 _TAG_WRITERS: dict[OutputFormat, Callable[[logging.Logger], TagWriter]] = {

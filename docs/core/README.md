@@ -1,4 +1,4 @@
-# Poseidon-MD Core
+# Posidon Core
 
 The core package contains the media pipeline, its shared models and policies,
 and the integration boundaries used by services. Start with the

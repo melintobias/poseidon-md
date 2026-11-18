@@ -8,15 +8,15 @@ from logging import WARNING
 from pathlib import Path
 from typing import TYPE_CHECKING
 
-from poseidon_md_core.models import Track
-from poseidon_md_core.pipeline.intake import validate_url
+from posidon_core.models import Track
+from posidon_core.pipeline.intake import validate_url
 from rich.progress import track
 from rich.prompt import Prompt
 
-from poseidon_md_cli.directories import get_music_directory
-from poseidon_md_cli.logger import CONSOLE
-from poseidon_md_cli.logger import log_stage_completion
-from poseidon_md_cli.options import OUTPUT_DIR_OPTION
+from posidon_cli.directories import get_music_directory
+from posidon_cli.logger import CONSOLE
+from posidon_cli.logger import log_stage_completion
+from posidon_cli.options import OUTPUT_DIR_OPTION
 
 from .types import PipelineSharedStorage
 from .types import PipelineStage
@@ -248,4 +248,4 @@ class OutputDirectorySubStage(PipelineStage):
 def welcome() -> None:
     """Render a welcome message to the console."""
     # TODO: Improve welcome message
-    CONSOLE.print("[bold green]Welcome to Poseidon-MD![/bold green]\n")
+    CONSOLE.print("[bold green]Welcome to Posidon![/bold green]\n")

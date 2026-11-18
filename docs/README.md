@@ -1,4 +1,4 @@
-# Poseidon-MD Documentation
+# Posidon Documentation
 
 - [Pipeline](pipeline/README.md) covers shared validation, CLI options, and media
   processing stages.

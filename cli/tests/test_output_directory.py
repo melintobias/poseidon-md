@@ -3,12 +3,12 @@
 import logging
 from pathlib import Path
 
-from poseidon_md_cli.main import app
-from poseidon_md_cli.options import CliOptions
-from poseidon_md_cli.pipeline.intake import IntakeStage
-from poseidon_md_cli.pipeline.intake import OutputDirectorySubStage
-from poseidon_md_cli.pipeline.types import PipelineSharedStorage
-from poseidon_md_cli.pipeline.types import StageOrchestrator
+from posidon_cli.main import app
+from posidon_cli.options import CliOptions
+from posidon_cli.pipeline.intake import IntakeStage
+from posidon_cli.pipeline.intake import OutputDirectorySubStage
+from posidon_cli.pipeline.types import PipelineSharedStorage
+from posidon_cli.pipeline.types import StageOrchestrator
 import pytest
 from typer.testing import CliRunner
 

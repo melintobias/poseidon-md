@@ -3,7 +3,7 @@
 import json
 from typing import TYPE_CHECKING
 
-from poseidon_md_core.models import TrackMetadata
+from posidon_core.models import TrackMetadata
 from pydantic import ValidationError
 import pytest
 

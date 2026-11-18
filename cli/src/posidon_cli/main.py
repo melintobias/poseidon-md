@@ -1,4 +1,4 @@
-"""Define the Poseidon-MD command-line entry point."""
+"""Define the Posidon command-line entry point."""
 
 from __future__ import annotations
 
@@ -25,7 +25,7 @@ from .pipeline.types import PipelineSharedStorage
 from .pipeline.types import StageOrchestrator
 
 app = Typer()
-"""Typer application exposed by the `poseidon-md` command."""
+"""Typer application exposed by the `posidon` command."""
 
 stages: list[type[PipelineStage]] = [
     IntakeStage,
@@ -72,7 +72,7 @@ def main(  # noqa: PLR0913 # Typer maps each option to a parameter.
         ),
     ] = DEFAULT_CLI_OPTIONS.output_dir,
 ) -> None:
-    """Process the supplied media URLs through the Poseidon pipeline.
+    """Process the supplied media URLs through the Posidon pipeline.
 
     Args:
         ctx: Typer command context.

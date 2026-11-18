@@ -6,8 +6,8 @@ from typing import TYPE_CHECKING
 from mutagen.id3 import ID3
 from mutagen.id3 import PictureType
 from mutagen.mp3 import EasyMP3
-from poseidon_md_core.adapters.tagging.mp3 import Mp3TagWriter
-from poseidon_md_core.models import TrackMetadata
+from posidon_core.adapters.tagging.mp3 import Mp3TagWriter
+from posidon_core.models import TrackMetadata
 import pytest
 
 if TYPE_CHECKING:

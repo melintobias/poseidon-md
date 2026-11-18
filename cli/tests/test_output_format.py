@@ -1,9 +1,9 @@
 """Tests for selecting the pipeline's audio and thumbnail formats."""
 
-from poseidon_md_cli.main import app
-from poseidon_md_cli.options import OutputFormat
-from poseidon_md_cli.options import ThumbnailFormat
-from poseidon_md_cli.pipeline.types import StageOrchestrator
+from posidon_cli.main import app
+from posidon_cli.options import OutputFormat
+from posidon_cli.options import ThumbnailFormat
+from posidon_cli.pipeline.types import StageOrchestrator
 import pytest
 from typer.testing import CliRunner
 

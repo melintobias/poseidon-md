@@ -6,12 +6,12 @@ from typing import TYPE_CHECKING
 
 from rich import progress
 
-from poseidon_md_cli.logger import CONSOLE
-from poseidon_md_cli.logger import log_stage_completion
-from poseidon_md_cli.pipeline.types import PipelineStage
+from posidon_cli.logger import CONSOLE
+from posidon_cli.logger import log_stage_completion
+from posidon_cli.pipeline.types import PipelineStage
 
 if TYPE_CHECKING:
-    from poseidon_md_cli.pipeline.types import PipelineSharedStorage
+    from posidon_cli.pipeline.types import PipelineSharedStorage
 
 
 class MovingStage(PipelineStage):

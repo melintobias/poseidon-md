@@ -1,7 +1,7 @@
 [project]
-name = "poseidon-md-core"
+name = "posidon-core"
 version = "0.1.0"
-description = "The core library for Poseidon-MD, providing shared utilities and functionality for end-to-end audio acquisition."
+description = "The core library for Posidon, providing shared utilities and functionality for end-to-end audio acquisition."
 # Keep a package description in builds from the standalone source archive.
 readme = { text = "The core package provides the media pipeline, shared models and policies, and integration contracts.", content-type = "text/markdown" }
 requires-python = ">=3.14"

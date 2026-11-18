@@ -3,9 +3,9 @@
 import logging
 from typing import TYPE_CHECKING
 
-from poseidon_md_cli.pipeline.moving import MovingStage
-from poseidon_md_cli.pipeline.types import PipelineSharedStorage
-from poseidon_md_core.models import Track
+from posidon_cli.pipeline.moving import MovingStage
+from posidon_cli.pipeline.types import PipelineSharedStorage
+from posidon_core.models import Track
 from pydantic import AnyUrl
 import pytest
 

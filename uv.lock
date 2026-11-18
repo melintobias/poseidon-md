@@ -4,9 +4,9 @@ requires-python = ">=3.14"
 
 [manifest]
 members = [
-    "poseidon-md",
-    "poseidon-md-cli",
-    "poseidon-md-core",
+    "posidon",
+    "posidon-cli",
+    "posidon-core",
 ]
 
 [[package]]
@@ -94,7 +94,7 @@ wheels = [
 ]
 
 [[package]]
-name = "poseidon-md"
+name = "posidon"
 version = "0.1.0"
 source = { virtual = "." }
 
@@ -117,11 +117,11 @@ dev = [
 ]
 
 [[package]]
-name = "poseidon-md-cli"
+name = "posidon-cli"
 version = "0.1.0"
 source = { editable = "cli" }
 dependencies = [
-    { name = "poseidon-md-core" },
+    { name = "posidon-core" },
     { name = "pydantic" },
     { name = "rich" },
     { name = "typer" },
@@ -130,7 +130,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "poseidon-md-core", editable = "core" },
+    { name = "posidon-core", editable = "core" },
     { name = "pydantic", specifier = ">=2.13.4" },
     { name = "rich", specifier = ">=15.0.0" },
     { name = "typer", specifier = ">=0.27.1" },
@@ -138,7 +138,7 @@ requires-dist = [
 ]
 
 [[package]]
-name = "poseidon-md-core"
+name = "posidon-core"
 version = "0.1.0"
 source = { editable = "core" }
 dependencies = [

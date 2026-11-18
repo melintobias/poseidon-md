@@ -41,9 +41,9 @@ DEBUG_TRACEBACK_FILTER = DebugTracebackFilter()
 """Shared filter controlling traceback visibility for the CLI logger."""
 
 CONSOLE = Console(theme=THEME)
-"""Shared console configured with the Poseidon-MD terminal theme."""
+"""Shared console configured with the Posidon terminal theme."""
 
-LOGGER = logging.getLogger("poseidon_md_cli")
+LOGGER = logging.getLogger("posidon_cli")
 """Shared application logger used by the command-line pipeline."""
 
 RICH_HANDLER = RichHandler(

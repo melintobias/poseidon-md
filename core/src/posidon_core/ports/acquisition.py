@@ -6,9 +6,9 @@ from typing import Protocol, TYPE_CHECKING
 if TYPE_CHECKING:
     from pydantic import AnyUrl
 
-    from poseidon_md_core.models import MediaArtifact
-    from poseidon_md_core.models import MetadataCandidate
-    from poseidon_md_core.models import TrackSource
+    from posidon_core.models import MediaArtifact
+    from posidon_core.models import MetadataCandidate
+    from posidon_core.models import TrackSource
 
 
 class SourceAcquisitionError(RuntimeError):
