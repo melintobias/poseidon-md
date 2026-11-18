@@ -45,9 +45,9 @@ uses the app icon colors.
 | Hex       | Role                                                                     |
 | --------- | ------------------------------------------------------------------------ |
 | `#0B2A4A` | Trident and wordmark on light; app icon background.                      |
-| `#0F8B8D` | Wave, sea grass, and `i` accent on light.                                |
+| `#38BDF8` | Wave, sea grass, and `i` accent on light.                                |
 | `#E6F6F4` | Trident and wordmark on dark; trident in the app icon.                   |
-| `#2DD4BF` | Wave, sea grass, and `i` accent on dark; wave and grass in the app icon. |
+| `#BAE6FD` | Wave, sea grass, and `i` accent on dark; wave and grass in the app icon. |
 
 ## Usage
 
