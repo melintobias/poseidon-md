@@ -53,6 +53,7 @@ pyz
 rgx
 RSE
 RUF
+seagrass
 SLF
 TALB
 TCOM
@@ -64,6 +65,7 @@ tracknumber
 TRCK
 uvx
 WIP
+wordmark
 writeinfojson
 writethumbnail
 XDG
