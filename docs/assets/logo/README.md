@@ -83,7 +83,9 @@ The symbol is drawn on a 128-unit grid with 10-unit strokes and round caps.
 The sea grass blades use thinner 8-unit strokes so that they stay secondary to
 the trident. The wordmark uses the same 10-unit stroke and is built from
 circles, elliptical arcs, and straight lines. In place of a dot, the `i` carries
-a spear tip that echoes the trident's tines and rises to the height of the `d`.
+a spear tip that echoes the trident's tines: an upward-pointing equilateral
+triangle with 16-unit sides. That size gives it about the same area as a round
+dot, and its base sits where the bottom of a dot would.
 Neither part uses a typeface, so the files render the same everywhere without
 embedded or installed fonts.
 
