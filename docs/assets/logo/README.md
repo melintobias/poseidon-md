@@ -26,8 +26,7 @@ and other small spaces.
 
 Use the stacked layout where the space is close to square, such as a social
 card. Use the tile layout where the logo should echo the app icon. Use the
-wordmark on its own in short, wide spaces, such as a page header; in it, a
-spear tip replaces the dot on the `i`.
+wordmark on its own in short, wide spaces, such as a page header.
 
 | Layout                            | Light backgrounds                                                        | Dark backgrounds                                                                   |
 | --------------------------------- | ------------------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
@@ -39,8 +38,9 @@ spear tip replaces the dot on the `i`.
 
 ## Colors
 
-The `i` accent is the dot on the `i`, or the spear tip in the wordmark-only
-layout. The tile layout contains the app icon, so it uses the app icon colors.
+The `i` accent is the spear tip that takes the place of the dot on the `i` in
+every version of the wordmark. The tile layout contains the app icon, so it
+uses the app icon colors.
 
 | Hex       | Role                                                                     |
 | --------- | ------------------------------------------------------------------------ |
@@ -82,16 +82,17 @@ the repository root:
 The symbol is drawn on a 128-unit grid with 10-unit strokes and round caps.
 The sea grass blades use thinner 8-unit strokes so that they stay secondary to
 the trident. The wordmark uses the same 10-unit stroke and is built from
-circles, elliptical arcs, and straight lines. Neither part uses a typeface, so
-the files render the same everywhere without embedded or installed fonts.
+circles, elliptical arcs, and straight lines. In place of a dot, the `i` carries
+a spear tip that echoes the trident's tines and rises to the height of the `d`.
+Neither part uses a typeface, so the files render the same everywhere without
+embedded or installed fonts.
 
 The layouts reuse that geometry at fixed scales:
 
 - The side-by-side layouts scale the wordmark to 84% beside the symbol.
 - The stacked layout scales the symbol to 125% above the wordmark at 84%.
 - The tile layout scales the app icon to 87.5% beside the wordmark at 84%.
-- The wordmark-only layout keeps the wordmark at full size. Its spear tip echoes
-  the trident's tines.
+- The wordmark-only layout keeps the wordmark at full size.
 
 When editing the artwork, keep the stroke widths, scales, and colors consistent
 across all files.

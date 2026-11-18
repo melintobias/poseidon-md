@@ -23,6 +23,6 @@
 			<circle cx="277" cy="54" r="19" />
 			<path d="M318 35v38m0-19a19 19 0 0 1 38 0v19" />
 		</g>
-		<circle cx="176" cy="15" r="6" fill="#0F8B8D" />
+		<path fill="#0F8B8D" d="M176 0l6 22h-12z" />
 	</g>
 </svg>
