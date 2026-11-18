@@ -7,3 +7,4 @@
   - [Ports](core/ports.md) describes integration contracts.
   - [Tag writers](core/tag-writers.md) describes metadata and artwork writing.
   - [Observability](core/observability.md) describes pipeline diagnostics.
+- [Logo](assets/logo/README.md) lists the logo files, colors, and usage rules.

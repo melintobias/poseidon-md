@@ -10,3 +10,4 @@ dictionaryDefinitions:
 ignorePaths:
   - pnpm-lock.yaml
   - uv.lock
+  - "**/*.svg"

@@ -64,6 +64,7 @@ tracknumber
 TRCK
 uvx
 WIP
+wordmark
 writeinfojson
 writethumbnail
 XDG
