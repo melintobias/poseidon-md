@@ -8,13 +8,13 @@ handles command-line presentation and currently uses yt-dlp directly in
 `validate_url` parses one source URL and returns `None` for invalid input. The
 CLI intake stage uses this function before deduplicating accepted URLs.
 
-The CLI's `--output-format` option controls audio conversion and tag writing.
-It defaults to `mp3`, the only supported format. `RetrievalStage` produces
-the audio, a metadata file, and a thumbnail. `TaggingStage` logs invalid
-metadata and skips tagging that track. For valid metadata, it selects the
-`TagWriter` for the output format and stores the metadata on the track after
-the write succeeds. `MovingStage` then moves the media file into the output
-directory and clears its temporary path.
+The CLI's `--output-format` option controls audio conversion and selects the
+[tag writer](../core/tag-writers.md). The CLI currently supports `mp3` and uses
+it by default. `RetrievalStage` produces the audio, a metadata file, and a
+thumbnail. `TaggingStage` logs invalid metadata and skips tagging that track.
+For valid metadata, it applies tags and artwork with the selected writer and
+stores the metadata on the track after the write succeeds. `MovingStage` then
+moves the media file into the output directory and clears its temporary path.
 
 The CLI's `--output-dir` (`-o`) option chooses the output directory. Without
 it, the CLI uses the platform's music directory: `~/Music` on Windows and
