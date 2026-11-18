@@ -1,5 +1,10 @@
 # Contributing
 
+## Project documentation
+
+Start with the [documentation index](docs/README.md) for the pipeline and core
+package architecture.
+
 ## Environment setup
 
 ### 1. Install Python dependencies

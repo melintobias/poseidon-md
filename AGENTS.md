@@ -3,18 +3,20 @@
 ## Begin with the project documentation
 
 - Before planning or changing code, read the root `README.md`,
-  `CONTRIBUTING.md`, and every README or design document governing the area
-  being changed. Follow relevant links from those documents before making
-  architectural or workflow decisions.
+  `CONTRIBUTING.md`, and the relevant documents listed in the
+  [documentation index](docs/README.md). Follow relevant links from those
+  documents before making architectural or workflow decisions.
 - Use the repository documentation and configuration as the source of truth for
   tool selection. In particular, consult `pyproject.toml` and `uv.lock` for
   Python work, `package.json` and `pnpm-lock.yaml` for Node.js work, and
   `prek.toml` for repository checks. Do not substitute a different package
   manager, formatter, linter, type checker, or test runner without an explicit
   request.
-- Read the nearest subtree `README.md` before adding a file or choosing its
-  location. Preserve the documented boundaries between packages, pipeline
-  stages, adapters, observability, models, ports, and tests.
+- Read the documentation for the relevant package or subsystem before adding a
+  file or choosing its location. Preserve the documented boundaries between
+  packages, pipeline stages, adapters, observability, models, ports, and tests.
+- Keep project documentation under `docs/`, except for the existing files at
+  the repository root.
 - If documentation, configuration, and implementation disagree, call out the
   mismatch. Reconcile it as part of the change when that is clearly in scope;
   otherwise, ask before making a decision that changes project behavior.
@@ -50,8 +52,8 @@
 
 ## Verify changes
 
-- Use the checks and commands documented by the repository and the nearest
-  relevant README.
+- Use the checks and commands documented by the repository and the relevant
+  pages in `docs/`.
 - Run the narrowest relevant checks while iterating, then the broader
   repository-configured checks appropriate to the files changed.
 - Report checks that were run and any checks that could not be run.
