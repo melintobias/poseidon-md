@@ -10,6 +10,7 @@ bsddb
 caplog
 cls
 ctx
+delenv
 discnumber
 dl
 dlp
@@ -64,6 +65,7 @@ uvx
 WIP
 writeinfojson
 writethumbnail
+XDG
 ydl
 ytdlp
 YTT
