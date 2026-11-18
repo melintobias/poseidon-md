@@ -1,4 +1,12 @@
-# Posidon
+<h1>
+	<picture>
+		<source
+			media="(prefers-color-scheme: dark)"
+			srcset="docs/assets/logo/posidon-logo-dark.svg"
+		/>
+		<img alt="Posidon" src="docs/assets/logo/posidon-logo.svg" width="320" />
+	</picture>
+</h1>
 
 [![Python 3.14+](https://img.shields.io/badge/Python-3.14%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/downloads/release/python-3140/)
 [![uv](https://img.shields.io/badge/-uv-261230?logo=uv&logoColor=D7FF64)](https://github.com/astral-sh/uv)
