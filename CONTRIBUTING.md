@@ -5,6 +5,17 @@
 Start with the [documentation index](docs/README.md) for the pipeline and core
 package architecture.
 
+## Style guides
+
+Posidon follows the [Google style guides](https://google.github.io/styleguide/).
+Python code follows the
+[Google Python Style Guide](https://google.github.io/styleguide/pyguide.html).
+Ruff enforces parts of it, such as Google-style docstrings and import ordering.
+
+Treat the guides as sensible defaults rather than strict rules, and use your
+own judgement when applying them. Departing from a guideline is fine when it
+makes the code clearer or more consistent with the code around it.
+
 ## Environment setup
 
 ### 1. Install Python dependencies
