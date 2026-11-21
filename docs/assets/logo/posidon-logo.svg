@@ -9,7 +9,7 @@
 		<path stroke="#38BDF8" d="M20 115c8 0 14-10 22-10s14 10 22 10 14-10 22-10 14 10 22 10" />
 	</g>
 	<path fill="#0B2A4A" d="M36 16l5 20v6H31v-6zM64 6l5 22v6H59v-6zM92 16l5 20v6H87v-6z" />
-	<!-- Wordmark, with a water droplet over the i and an anchor below it -->
+	<!-- Wordmark, with an anchor-shaped i -->
 	<g transform="translate(136 22) scale(0.84)">
 		<g fill="none" stroke="#0B2A4A" stroke-linecap="round" stroke-linejoin="round" stroke-width="10">
 			<path d="M5 35v63" />
@@ -24,6 +24,5 @@
 		</g>
 		<path fill="#0B2A4A" d="M152 84c0 11 10 19 24 19s24-8 24-19h-7c0 6-7 9-17 9s-17-3-17-9z" />
 		<path fill="#0B2A4A" d="M155.5 79l8 9h-16zM196.5 79l8 9h-16z" />
-		<path fill="#38BDF8" d="M176 0c3 4.5 7.5 9.5 7.5 14.5a7.5 7.5 0 0 1-15 0c0-5 4.5-10 7.5-14.5z" />
 	</g>
 </svg>
