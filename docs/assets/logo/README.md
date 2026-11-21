@@ -2,9 +2,9 @@
 
 The Posidon logo pairs a trident with a sine wave. The wave stands for both the
 sea and an audio signal, which ties the name to what the tool does. A faint
-compass rose sits behind the trident, and the `i` in the wordmark carries a
-water droplet in place of its dot and ends in an anchor. The SVG files in this
-directory are the source of truth for the logo.
+compass rose sits behind the trident, and the `i` in the wordmark has no dot
+and ends in an anchor. The SVG files in this directory are the source of truth
+for the logo.
 
 ## Files
 
@@ -16,14 +16,14 @@ The logo has one file for light backgrounds and one for dark backgrounds.
 
 ## Colors
 
-| Role                                     | Light     | Dark      |
-| ---------------------------------------- | --------- | --------- |
-| Trident and wordmark.                    | `#0B2A4A` | `#E6F6F4` |
-| Wave and the water droplet over the `i`. | `#38BDF8` | `#38BDF8` |
-| Compass rose.                            | `#E0F2FE` | `#0B2A4A` |
+| Role                  | Light     | Dark      |
+| --------------------- | --------- | --------- |
+| Trident and wordmark. | `#0B2A4A` | `#E6F6F4` |
+| Wave.                 | `#38BDF8` | `#38BDF8` |
+| Compass rose.         | `#E0F2FE` | `#0B2A4A` |
 
-The wave and the droplet use the same blue on both backgrounds. The compass
-rose uses a color close to each background so that it stays faint.
+The wave uses the same blue on both backgrounds. The compass rose uses a color
+close to each background so that it stays faint.
 
 ## Usage
 
@@ -66,17 +66,13 @@ The symbol is drawn on a 128-unit grid with 10-unit strokes and round caps:
 
 The wordmark sits beside the symbol at 84% scale. It uses the same 10-unit
 stroke and is built from circles, elliptical arcs, straight lines, and curves.
-The `i` has two additions:
-
-- A water droplet takes the place of the dot. Its round base is 15 units across
-  and sits where a dot would, and its point rises level with the top of the
-  `d`.
-- The stem runs on below the baseline to the same depth as the descender on the
-  `p`, where it ends in an anchor. The anchor arms are a filled crescent 48
-  units wide that is 10 units thick at the bottom, like the letter strokes, and
-  7 units thick at the ends. The arms rise 19 units from the bottom to their
-  ends, where a 16-unit arrow fluke caps each one. The whole anchor sits below
-  the bottoms of the other letters, so the letter spacing is unchanged.
+The `i` is drawn as an anchor. It has no dot, so the stem starts at the
+x-height and runs on below the baseline to the same depth as the descender on
+the `p`, where it ends in the anchor arms. The arms are a filled crescent 48
+units wide that is 10 units thick at the bottom, like the letter strokes, and 7
+units thick at the ends. The arms rise 19 units from the bottom to their ends,
+where a 16-unit arrow fluke caps each one. The whole anchor sits below the
+bottoms of the other letters, so the letter spacing is unchanged.
 
 Neither part uses a typeface, so the files render the same everywhere without
 embedded or installed fonts.
